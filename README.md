@@ -336,6 +336,32 @@ Normalizy.configure do |config|
 end
 ```
 
+## RSpec
+
+If you use [RSpec](http://rspec.info), we have built-in matchers for you.
+Add the following code to your `rails_helper.rb`
+
+```ruby
+RSpec.configure do |config|
+ config.include Normalizy::RSpec
+end
+```
+
+And now you can use some of the matchers:
+
+##### Result Matcher
+
+```ruby
+it { is_expected.to normalizy(:email).from(' Email@gmail.com  ').to 'email@gmail.com' }
+```
+
+##### Filter Matcher
+
+```ruby
+it { is_expected.to normalizy(:email).with :downcase }
+```
+
+
 ## Love it!
 
 Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=normalizy) or [Gratipay](https://gratipay.com/~wbotelhos). Thanks! (:
