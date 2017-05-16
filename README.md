@@ -39,7 +39,7 @@ Now some email like `  myemail@example.org  ` will be saved as `email@example.co
 
 ## Filters
 
-We have a couple of built-in filters. The most one is just a wrapper o the original String methods:
+We have a couple of built-in filters.
 
 ### Number
 
@@ -101,7 +101,7 @@ You can normalize more than one attribute at once too, with one or muiltiple fil
 normalizy :email, :username, with: :downcase
 ```
 
-Of course you can declare muiltiples attribute and multiple filters together.
+Of course you can declare muiltiples attribute and multiple filters, either.
 It is possible to make sequential normalizy calls:
 
 ```ruby
@@ -113,7 +113,7 @@ In this case, each line will be evaluated from the top to the bottom.
 
 ## Default Filters
 
-You can configure some default filters to be runned. Edit you initializer at `config/initializers/normalizy.rb`:
+You can configure some default filters to be runned. Edit initializer at `config/initializers/normalizy.rb`:
 
 ```ruby
 Normalizy.configure do |config|
@@ -168,7 +168,7 @@ normalizy :name, with: :blacklist
 # 'Washington *** Botelho'
 ```
 
-If you want to pass options to your filter, just call it as hash and the value will be passed to the custom filter:
+If you want to pass options to your filter, just call it as a hash and the value will be send to the custom filter:
 
 ```ruby
 module Normalizy
@@ -214,11 +214,9 @@ normalizy :name, with: :blacklist, &->(value) { value.sub('filtered', '(filtered
 # 'Washington (filtered 2x) Botelho'
 ```
 
-The block
-
 ## Method Filters
 
-If a built-in filter is not found, Normalizy will try to find a method to suply the normalize with the same name of the given filter:
+If a built-in filter is not found, Normalizy will try to find a method in the current class.
 
 ```ruby
 normalizy :birthday, with: :parse_date
@@ -231,7 +229,7 @@ end
 # '1984/10/23'
 ```
 
-If you gives an option, it will be passed to the function too:
+If you gives an option, it will be passed to the function:
 
 ```ruby
 normalizy :birthday, with: { parse_date: { format: '%Y/%m/%d' }
@@ -244,7 +242,7 @@ end
 # '1984/10/23'
 ```
 
-Block methods works here too.
+Block methods works here either.
 
 ## Native Filter
 
@@ -279,7 +277,7 @@ end
 ## Type Cast
 
 An input field with `$ 42.00` dollars when sent to model with a field with `integer` type,
-will be converted to `0`, since the type does not match. But you want to use the value before Rails do this cast the type.
+will be converted to `0`, since the type does not match. But you want to use the value before Rails cast the type.
 
 To receive the value before type cast, just pass a `raw` options as `true`:
 
@@ -290,7 +288,7 @@ normalizy :amount, with: :number, raw: true
 # 4200
 ```
 
-To avoid repeat the `raw: true` where you will always to use, you can register a filter with this options:
+To avoid repeat the `raw: true` when you have multiple uses, you can register a filter with this options:
 
 ```ruby
 Normalizy.configure do |config|
@@ -301,7 +299,7 @@ end
 ## Alias
 
 Sometimes you want to give a better name to your filter, just to keep the things semantic.
-But duplicates the code just to redefine a new name is not a good idea, so, just create an alias:
+Duplicates the code, as you know, it is not a good idea, so, create an alias:
 
 ```ruby
 Normalizy.configure do |config|
@@ -310,7 +308,7 @@ end
 ```
 
 Now, `money` will delegate to `number` filter.
-Since we already know the need of `raw` options, we can declare it here too:
+Since we already know the need of `raw` options, we can declare it here:
 
 ```ruby
 Normalizy.configure do |config|
@@ -319,7 +317,7 @@ end
 ```
 
 But `number` filter already works with `raw: true`, don't need to tell it again.
-An our previous example, about `amount`, was refactored to:
+At our previously example, about `amount`, was refactored to:
 
 ```ruby
 normalizy :amount, with: :money
@@ -338,7 +336,7 @@ end
 
 ## RSpec
 
-If you use [RSpec](http://rspec.info), we have built-in matchers for you.
+If you use [RSpec](http://rspec.info), we did built-in matchers for you.
 Add the following code to your `rails_helper.rb`
 
 ```ruby
