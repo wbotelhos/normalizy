@@ -7,7 +7,7 @@ Attribute normalizer for ActiveRecord.
 
 ## Description
 
-If you know the obvious format of an input, why not normalize it instead of raise an validation error to your use? Make the follow email `  myemail@example.org  ` valid like `email@example.com` with no need to override acessors methods.
+If you know the obvious format of an input, why not normalize it instead of raise an validation error to your use? Make the follow email `  Email@example.com  ` valid like `email@example.com` with no need to override acessors methods.
 
 ## install
 
@@ -35,7 +35,7 @@ class User < ApplicationRecord
 end
 ```
 
-Now some email like `  myemail@example.org  ` will be saved as `email@example.com`.
+Now some email like `  myemail@example.com  ` will be saved as `email@example.com`.
 
 ## Filters
 
@@ -350,7 +350,7 @@ And now you can use some of the matchers:
 ##### Result Matcher
 
 ```ruby
-it { is_expected.to normalizy(:email).from(' Email@gmail.com  ').to 'email@gmail.com' }
+it { is_expected.to normalizy(:email).from(' Email@example.com  ').to 'email@example.com' }
 ```
 
 ##### Filter Matcher
