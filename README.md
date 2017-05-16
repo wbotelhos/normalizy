@@ -221,7 +221,7 @@ If a built-in filter is not found, Normalizy will try to find a method in the cu
 ```ruby
 normalizy :birthday, with: :parse_date
 
-def parse_date(input, options = {})
+def parse_date(input)
   Time.zone.parse(input).strftime '%Y/%m/%d'
 end
 
