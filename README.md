@@ -46,11 +46,22 @@ We have a couple of built-in filters.
 ```ruby
 normalizy :age, with: :number
 
-' 32'
+' 32x'
+# '32'
+```
+
+If you want cast the value to an integer, provide `cast` option:
+
+```ruby
+normalizy :age, with: number: { cast: :to_i }
+
+' 32x'
 # 32
 ```
 
-By default, `number` works with input value before [Type Cast](#type-cast)
+The `:to_i`, `:to_f` and so is the method used to make the [Type Cast](#type-cast).
+By default, `number` works with value before Type Cast.
+
 ### Strip
 
 Options:
@@ -316,7 +327,6 @@ Normalizy.configure do |config|
 end
 ```
 
-But `number` filter already works with `raw: true`, don't need to tell it again.
 At our previously example, about `amount`, was refactored to:
 
 ```ruby
