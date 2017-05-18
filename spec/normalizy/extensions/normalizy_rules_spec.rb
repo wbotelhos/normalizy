@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Normalizy::Extension, '#normalizy_rules' do
+RSpec.describe Normalizy::Extension, ':normalizy_rules' do
   let!(:model) { User }
 
   before { model.normalizy_rules = {} }

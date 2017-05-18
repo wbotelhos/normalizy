@@ -24,39 +24,33 @@ RSpec.describe Normalizy::Config, '#alias' do
   end
 
   context 'with raw type' do
-    let!(:object) { User.new amount: 'R$ 4.200,00' }
-
-    before { object.class.normalizy_rules = {} }
+    before { User.normalizy_rules = {} }
 
     context 'configured on setup' do
       before do
         Normalizy.configure do |config|
-          config.alias :money, :number, raw: true
+          config.alias :age, :number, raw: true
         end
       end
 
       it 'alias one filter to others' do
-        object.class.normalizy :amount, with: :money
+        User.normalizy :age, with: :age
 
-        object.save
-
-        expect(object.amount).to eq 420_000
+        expect(User.create(age: '= 42').age).to eq 42
       end
     end
 
     context 'configured on normalizy' do
       before do
         Normalizy.configure do |config|
-          config.alias :money, :number
+          config.alias :age, :number
         end
       end
 
       it 'alias one filter to others' do
-        object.class.normalizy :amount, with: :money, raw: true
+        User.normalizy :age, with: :age, raw: true
 
-        object.save
-
-        expect(object.amount).to eq 420_000
+        expect(User.create(age: '= 42').age).to eq 42
       end
     end
   end

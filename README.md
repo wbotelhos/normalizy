@@ -41,6 +41,113 @@ Now some email like `  myemail@example.com  ` will be saved as `email@example.co
 
 We have a couple of built-in filters.
 
+### Money
+
+Transform a value to money format.
+
+```ruby
+normalizy :amount, with: :money
+
+'$ 42.00'
+# '42.00'
+```
+
+#### delimiter
+
+The `delimiter` will be keeped on value to be possible cast the right cents value.
+You can change the delimiter:
+
+```ruby
+normalizy :amount, with: money: { delimiter: ',' }
+
+'R$ 42,00'
+# '42,00'
+```
+
+If you do not want pass it as options, Normalizy will fetch your I18n config:
+
+```yaml
+en:
+  currency:
+    format:
+      separator: '.'
+```
+
+And if it does not exists, `.` will be used as default.
+
+#### type
+
+You can retrieve the value in *cents* format, use the `type` options as `cents`:
+
+```ruby
+normalizy :amount, with: money: { type: :cents }
+
+'$ 42.00'
+# '4200'
+```
+
+#### delimiter
+
+As you could see on the last example, when using `type: :cents` is important the number of cents digit.
+So, you can configure it to avoid the following error:
+
+```ruby
+normalizy :amount, with: money: { type: :cents }
+
+'$ 42.0'
+# 420
+```
+
+When you parse it back, the value need to be divided by `100` to be presented, but it will result in a value you do not want: `4.2` instead of the original `42.0`. Just provide a `delimiter`:
+
+```ruby
+normalizy :amount, with: money: { delimiter: 2 }
+
+'$ 42.0'
+# 42.00
+```
+
+```ruby
+normalizy :amount, with: money: { delimiter: 2, type: :cents }
+
+'$ 42.0'
+# 4200
+```
+
+If you do not want pass it as options, Normalizy will fetch your I18n config:
+
+```yaml
+en:
+  currency:
+    format:
+      delimiter: 2
+```
+
+And if it does not exists, `2` will be used as default.
+
+#### cast
+
+If you need get a number over a normalized string in a number style, provide `cast` option with desired cast method:
+
+```ruby
+normalizy :amount, with: money: { cast: :to_i }
+
+'$ 42.00'
+# 4200
+```
+
+Just pay attention to avoid to use `type: :cents` together `cast` with float parses.
+Since `type` runs first, you will add decimal in a number that already is represented with decimal, but as integer:
+
+```ruby
+normalizy :amount, with: money: { cast: :to_f, type: :cents }
+
+'$ 42.00'
+# 4200.0
+```
+
+By default, `money` works with value before [Type Cast](#type-cast).
+
 ### Number
 
 ```ruby
@@ -50,7 +157,7 @@ normalizy :age, with: :number
 # '32'
 ```
 
-If you want cast the value to an integer, provide `cast` option:
+If you want cast the value, provide `cast` option with desired cast method:
 
 ```ruby
 normalizy :age, with: number: { cast: :to_i }
@@ -59,8 +166,7 @@ normalizy :age, with: number: { cast: :to_i }
 # 32
 ```
 
-The `:to_i`, `:to_f` and so is the method used to make the [Type Cast](#type-cast).
-By default, `number` works with value before Type Cast.
+By default, `number` works with value before [Type Cast](#type-cast).
 
 ### Strip
 
@@ -271,7 +377,7 @@ normalizy :name, with: :reverse
 Maybe you want to declare an inline filter, in this case, just use a Lambda or Proc:
 
 ```ruby
-normalizy :age, with: ->(input) { input.abs }
+normalizy :age, with: ->(input) { input.to_i.abs }
 
 -32
 # 32
@@ -281,13 +387,13 @@ You can use it on filters declaration too:
 
 ```ruby
 Normalizy.configure do |config|
-  config.add :age, ->(input) { input.abs }
+  config.add :age, ->(input) { input.to_i.abs }
 end
 ```
 
 ## Type Cast
 
-An input field with `$ 42.00` dollars when sent to model with a field with `integer` type,
+An input field with `= 42` value when sent to model with a field as `integer` type,
 will be converted to `0`, since the type does not match. But you want to use the value before Rails cast the type.
 
 To receive the value before type cast, just pass a `raw` options as `true`:
@@ -295,45 +401,54 @@ To receive the value before type cast, just pass a `raw` options as `true`:
 ```ruby
 normalizy :amount, with: :number, raw: true
 
-'$ 42.00'
-# 4200
+'= 42'
+# 42
 ```
 
-To avoid repeat the `raw: true` when you have multiple uses, you can register a filter with this options:
+To avoid repeat the `raw: true` when you have multiple uses, you can register a filter:
 
 ```ruby
 Normalizy.configure do |config|
-  config.add :money, ->(input) { input.gsub(/\D/, '') }, raw: true
+  config.add :raw_number, ->(input) { input.gsub(/\D/, '') }, raw: true
 end
+```
+
+And use it in short version:
+
+```ruby
+normalizy :amount, with: :raw_number
+
+'= 42'
+# 42
 ```
 
 ## Alias
 
 Sometimes you want to give a better name to your filter, just to keep the things semantic.
-Duplicates the code, as you know, it is not a good idea, so, create an alias:
+Duplicates the code, as you know, is not a good idea, so, create an alias:
 
 ```ruby
 Normalizy.configure do |config|
-  config.alias :money, :number
+  config.alias :age, :number
 end
 ```
 
-Now, `money` will delegate to `number` filter.
+Now, `age` will delegate to `number` filter.
 Since we already know the need of `raw` options, we can declare it here:
 
 ```ruby
 Normalizy.configure do |config|
-  config.alias :money, :number, raw: true
+  config.alias :age, :number, raw: true
 end
 ```
 
-At our previously example, about `amount`, was refactored to:
+And now, the aliased filter will work fine:
 
 ```ruby
-normalizy :amount, with: :money
+normalizy :age, with: :age
 
-'$ 42.00'
-# 4200
+'= 42'
+# 42
 ```
 
 If you need to alias multiple filters, just provide an array of them:
@@ -365,10 +480,19 @@ it { is_expected.to normalizy(:email).from(' Email@example.com  ').to 'email@exa
 
 ##### Filter Matcher
 
+It will match the given filter literally:
+
 ```ruby
 it { is_expected.to normalizy(:email).with :downcase }
 ```
 
+```ruby
+it { is_expected.to normalizy(:email).with %i[downcase squish] }
+```
+
+```ruby
+it { is_expected.to normalizy(:email).with(trim: { side: :left }) }
+```
 
 ## Love it!
 

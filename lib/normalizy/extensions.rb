@@ -51,12 +51,17 @@ module Normalizy
         value   = nil
 
         [rules].flatten.compact.each do |rule|
-          value         = original_value(attribute, rule, options)
-          aliased_rules = [aliases.key?(rule) ? aliases[rule] : rule]
+          result_rules = [aliases.key?(rule) ? aliases[rule] : rule]
 
-          aliased_rules.flatten.compact.each do |alias_rule|
-            filter, filter_options = extract_filter(alias_rule)
-            value = extract_value(value, filter, filter_options, block)
+          result_rules.flatten.compact.each do |result_rule|
+            filter, filter_options = extract_filter(result_rule)
+
+            if filter.respond_to?(:name)
+              rule_name = filter.name.tableize.split('/').last.singularize.to_sym
+            end
+
+            original = original_value(attribute, rule_name, options)
+            value    = extract_value(original, filter, filter_options, block)
           end
         end
 

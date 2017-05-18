@@ -6,8 +6,10 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table :users do |t|
+    t.decimal :amount, precision: 16, scale: 10
     t.integer :age
-    t.integer :amount
+    t.integer :amount_cents
+    t.string  :amount_text
     t.string  :name
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe '#apply_normalizations' do
+RSpec.describe '#apply_normalizy' do
   context 'when object has no normalizy' do
     let!(:object) { Clean.create name: '  washington  Botelho  ' }
 
@@ -36,12 +36,6 @@ RSpec.describe '#apply_normalizations' do
       context 'but block is' do
         let!(:block) { ->(value) { value.upcase } }
 
-        before do
-          Normalizy.configure do |config|
-            config.add :blacklist, Normalizy::Filters::Blacklist
-          end
-        end
-
         it 'executes the block' do
           object.class.normalizy :name, with: block
 
@@ -53,7 +47,7 @@ RSpec.describe '#apply_normalizations' do
     end
 
     context 'when a rule is given' do
-      context 'as symbol format' do
+      context 'as a symbol format' do
         before { object.class.normalizy :name, with: :squish }
 
         specify do
@@ -75,7 +69,7 @@ RSpec.describe '#apply_normalizations' do
 
       context 'as a hash format' do
         context 'and filter does not receives options' do
-          before { object.class.normalizy :name, with: { squish: :options } }
+          before { object.class.normalizy :name, with: { squish: :ignored } }
 
           specify do
             object.save
