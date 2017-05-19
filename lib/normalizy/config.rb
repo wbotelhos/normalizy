@@ -9,6 +9,7 @@ module Normalizy
 
     def add(name, value, raw: false)
       @filters[name] = value
+
       @normalizy_raws << name if raw
 
       self
@@ -24,13 +25,14 @@ module Normalizy
     def initialize
       @default_filters   = {}
       @normalizy_aliases = {}
-      @normalizy_raws    = %i[date money number]
+      @normalizy_raws    = %i[date money number percent]
 
       @filters = {
-        date:   Normalizy::Filters::Date,
-        money:  Normalizy::Filters::Money,
-        number: Normalizy::Filters::Number,
-        strip:  Normalizy::Filters::Strip
+        date:    Normalizy::Filters::Date,
+        money:   Normalizy::Filters::Money,
+        number:  Normalizy::Filters::Number,
+        percent: Normalizy::Filters::Percent,
+        strip:   Normalizy::Filters::Strip
       }
     end
   end

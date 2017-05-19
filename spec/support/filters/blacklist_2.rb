@@ -3,7 +3,7 @@
 module Normalizy
   module Filters
     module Blacklist2
-      def self.call(input, options = {})
+      def self.call(_input, options = {})
         attribute = options[:attribute]
 
         "#{attribute}: #{options[:object].send(attribute)}"

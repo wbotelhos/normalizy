@@ -13,6 +13,7 @@ RSpec.describe Normalizy::Config, '#add' do
       date:      Normalizy::Filters::Date,
       money:     Normalizy::Filters::Money,
       number:    Normalizy::Filters::Number,
+      percent:   Normalizy::Filters::Percent,
       strip:     Normalizy::Filters::Strip
     )
   end

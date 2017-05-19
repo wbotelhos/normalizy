@@ -4,6 +4,6 @@ require 'rails_helper'
 
 RSpec.describe Normalizy::Config, 'normalizy_raws' do
   it 'has the right defaults' do
-    expect(subject.normalizy_raws).to eq %i[date money number]
+    expect(subject.normalizy_raws).to eq %i[date money number percent]
   end
 end

@@ -3,7 +3,7 @@
 module Normalizy
   module Filters
     module BlacklistBlock
-      def self.call(input, options = {})
+      def self.call(input)
         yield input
       end
     end

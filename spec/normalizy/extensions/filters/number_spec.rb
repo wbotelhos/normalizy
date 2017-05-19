@@ -3,9 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, 'filters:number' do
-  before do
-    described_class.normalizy_rules = {}
-  end
+  before { described_class.normalizy_rules = {} }
 
   specify do
     described_class.normalizy :name, with: :number
