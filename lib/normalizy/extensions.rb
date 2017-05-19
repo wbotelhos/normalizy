@@ -60,8 +60,9 @@ module Normalizy
               rule_name = filter.name.tableize.split('/').last.singularize.to_sym
             end
 
-            original = original_value(attribute, rule_name, options)
-            value    = extract_value(original, filter, filter_options, block)
+            original     = original_value(attribute, rule_name, options)
+            full_options = filter_options.merge(attribute: attribute, object: self)
+            value        = extract_value(original, filter, full_options, block)
           end
         end
 

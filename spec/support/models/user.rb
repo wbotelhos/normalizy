@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   normalizy :name
 
   def custom_reverse(input, options = {})
-    "#{input.reverse}.#{options}.custom"
+    "'#{input.reverse}' to '#{options[:object].name}'"
   end
 end

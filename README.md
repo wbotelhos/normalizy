@@ -41,6 +41,57 @@ Now some email like `  myemail@example.com  ` will be saved as `email@example.co
 
 We have a couple of built-in filters.
 
+### Date
+
+Transform a value to date format.
+
+```ruby
+normalizy :birthday, with: :date
+
+'1984-10-23'
+# Tue, 23 Oct 1984 00:00:00 UTC +00:00
+```
+
+By default, the date is treat as `%F` format and as `UTC` time.
+
+#### format
+
+You can change the format using the `format` options:
+
+```ruby
+normalizy :birthday, with: date: { format: '%y/%m/%d' }
+
+'84/10/23'
+# Tue, 23 Oct 1984 00:00:00 UTC +00:00
+```
+
+#### time zone
+
+To convert the date on your time zone, just provide the `time_zone` option:
+
+```ruby
+normalizy :birthday, with: date: { time_zone: '%y/%m/%d' }
+
+'1984-10-23'
+# Tue, 23 Oct 1984 00:00:00 EDT -04:00
+```
+
+#### error message
+
+If an invalid date is provided, Normalizy will add an error on attribute of the related object.
+You can customize the error via I18n config:
+
+```yml
+en:
+  normalizy:
+    errors:
+      date:
+        user:
+          birthday: '%{value} is an invalid date.'
+```
+
+If no configuration is provided, the default message will be `'%{value} is an invalid date.`.
+
 ### Money
 
 Transform a value to money format.
@@ -285,6 +336,8 @@ normalizy :name, with: :blacklist
 # 'Washington *** Botelho'
 ```
 
+#### options
+
 If you want to pass options to your filter, just call it as a hash and the value will be send to the custom filter:
 
 ```ruby
@@ -305,6 +358,13 @@ normalizy :name, with: blacklist: { replacement: '---' }
 'Washington Fuck Botelho'
 # 'Washington --- Botelho'
 ```
+
+### options value
+
+By default, Modules and instance methods of class will receveis the following attributes on `options` argument:
+
+- `object`: The object that Normalizy is acting;
+- `attribute`: The attribute of the object that Normalizy is acting.
 
 You can pass a block and it will be received on filter:
 

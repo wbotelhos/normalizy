@@ -10,6 +10,7 @@ RSpec.describe Normalizy::Config, '#add' do
 
     expect(Normalizy.config.filters).to eq(
       blacklist: :blacklist_filter,
+      date:      Normalizy::Filters::Date,
       money:     Normalizy::Filters::Money,
       number:    Normalizy::Filters::Number,
       strip:     Normalizy::Filters::Strip

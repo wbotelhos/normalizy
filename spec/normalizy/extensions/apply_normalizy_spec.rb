@@ -16,7 +16,7 @@ RSpec.describe '#apply_normalizy' do
 
     before { object.class.normalizy_rules = {} }
 
-    context 'when a rule is not given' do
+    context 'when a filter is not given' do
       context 'and no block' do
         before do
           Normalizy.configure do |config|
@@ -46,8 +46,8 @@ RSpec.describe '#apply_normalizy' do
       end
     end
 
-    context 'when a rule is given' do
-      context 'as a symbol format' do
+    context 'when a filter is given' do
+      context 'as a symbol' do
         before { object.class.normalizy :name, with: :squish }
 
         specify do
@@ -57,7 +57,7 @@ RSpec.describe '#apply_normalizy' do
         end
       end
 
-      context 'as array of symbol format' do
+      context 'as array of symbol' do
         before { object.class.normalizy :name, with: [:squish] }
 
         specify do
@@ -67,21 +67,21 @@ RSpec.describe '#apply_normalizy' do
         end
       end
 
-      context 'as a hash format' do
-        context 'and filter does not receives options' do
-          before { object.class.normalizy :name, with: { squish: :ignored } }
+      context 'as a hash' do
+        context 'with a filter that does not accepts options' do
+          before { object.class.normalizy :name, with: { squish: { ignored: true } } }
 
-          specify do
+          it 'executes the filter ignoring the options' do
             object.save
 
             expect(object.name).to eq 'Washington Fuck Botelho'
           end
         end
 
-        context 'and filter receives options' do
+        context 'with a filter that accepts options' do
           before { object.class.normalizy :name, with: { strip: { side: :left } } }
 
-          specify do
+          it 'executes the filter with given options' do
             object.save
 
             expect(object.name).to eq 'Washington  Fuck  Botelho  '
@@ -90,12 +90,26 @@ RSpec.describe '#apply_normalizy' do
       end
 
       context 'as a module' do
-        before { object.class.normalizy :name, with: Normalizy::Filters::Blacklist }
+        context 'with just one arg (input)' do
+          before { object.class.normalizy :name, with: Normalizy::Filters::Blacklist1 }
 
-        specify do
-          object.save
+          it 'receives the input value' do
+            object.save
 
-          expect(object.name).to eq '  Washington  filtered  Botelho  '
+            expect(object.name).to eq '  Washington  filtered  Botelho  '
+          end
+        end
+
+        context 'with two args (input, options) with' do
+          before do
+            object.class.normalizy :name, with: Normalizy::Filters::Blacklist2
+          end
+
+          it 'receives the input value with options' do
+            object.save
+
+            expect(object.name).to eq 'name:   Washington  Fuck  Botelho  '
+          end
         end
       end
 
@@ -104,7 +118,7 @@ RSpec.describe '#apply_normalizy' do
 
         before do
           Normalizy.configure do |config|
-            config.add :blacklist, Normalizy::Filters::Blacklist
+            config.add :blacklist, Normalizy::Filters::BlacklistBlock
           end
         end
 
@@ -113,7 +127,7 @@ RSpec.describe '#apply_normalizy' do
 
           object.save
 
-          expect(object.name).to eq '  WASHINGTON  FILTERED  BOTELHO  '
+          expect(object.name).to eq '  WASHINGTON  FUCK  BOTELHO  '
         end
       end
     end
@@ -121,22 +135,22 @@ RSpec.describe '#apply_normalizy' do
     context 'when no filter match' do
       context 'and object has a method that responds' do
         context 'with no options on rule' do
-          it 'runs the native method with empty options' do
+          it 'runs the class method with self object on options' do
             object.class.normalizy :name, with: :custom_reverse
 
             object.save
 
-            expect(object.name).to eq '  ohletoB  kcuF  notgnihsaW  .{}.custom'
+            expect(object.name).to eq "'  ohletoB  kcuF  notgnihsaW  ' to '  Washington  Fuck  Botelho  '"
           end
         end
 
         context 'with no options on rule' do
-          it 'runs the native method with given options' do
-            object.class.normalizy :name, with: { custom_reverse: :options }
+          it 'runs the class method with given options and self object on it' do
+            object.class.normalizy :name, with: { custom_reverse: {} }
 
             object.save
 
-            expect(object.name).to eq '  ohletoB  kcuF  notgnihsaW  .options.custom'
+            expect(object.name).to eq "'  ohletoB  kcuF  notgnihsaW  ' to '  Washington  Fuck  Botelho  '"
           end
         end
       end

@@ -24,9 +24,10 @@ module Normalizy
     def initialize
       @default_filters   = {}
       @normalizy_aliases = {}
-      @normalizy_raws    = %i[money number]
+      @normalizy_raws    = %i[date money number]
 
       @filters = {
+        date:   Normalizy::Filters::Date,
         money:  Normalizy::Filters::Money,
         number: Normalizy::Filters::Number,
         strip:  Normalizy::Filters::Strip
