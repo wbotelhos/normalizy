@@ -18,6 +18,7 @@ RSpec.describe Normalizy::Filters::Money do
     it { expect(subject.call('1030.70')).to  eq '1030.70' }
     it { expect(subject.call('10300.70')).to eq '10300.70' }
 
+    it { expect(subject.call('R$ 0.01')).to     eq '0.01' }
     it { expect(subject.call('R$ 1')).to        eq '1.00' }
     it { expect(subject.call('R$ 1.70')).to     eq '1.70' }
     it { expect(subject.call('R$ 103.70')).to   eq '103.70' }
