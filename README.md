@@ -92,6 +92,28 @@ en:
 
 If no configuration is provided, the default message will be `'%{value} is an invalid date.`.
 
+#### adjust
+
+If your model receive a `Time` or `DateTime`, you can provide `adjust` options to change you time to begin o the day:
+
+```ruby
+normalizy :birthday, with: date: { adjust: :begin }
+
+Tue, 23 Oct 1984 11:30:00 EDT -04:00
+# Tue, 23 Oct 1984 00:00:00 EDT -04:00
+```
+
+Or to the end of the day:
+
+```ruby
+normalizy :birthday, with: date: { adjust: :end }
+
+Tue, 23 Oct 1984 00:00:00 EDT -04:00
+# Tue, 23 Oct 1984 11:59:59 EDT -04:00
+```
+
+By default, `number` works with value before [Type Cast](#type-cast).
+
 ### Money
 
 Transform a value to money format.
@@ -103,13 +125,13 @@ normalizy :amount, with: :money
 # '42.00'
 ```
 
-#### delimiter
+#### separator
 
-The `delimiter` will be keeped on value to be possible cast the right cents value.
-You can change the delimiter:
+The `separator` will be keeped on value to be possible cast the right integer value.
+You can change this separator:
 
 ```ruby
-normalizy :amount, with: money: { delimiter: ',' }
+normalizy :amount, with: money: { separator: ',' }
 
 'R$ 42,00'
 # '42,00'
@@ -137,9 +159,9 @@ normalizy :amount, with: money: { type: :cents }
 # '4200'
 ```
 
-#### delimiter
+#### precision
 
-As you could see on the last example, when using `type: :cents` is important the number of cents digit.
+As you could see on the last example, when using `type: :cents` is important the number of decimal digits.
 So, you can configure it to avoid the following error:
 
 ```ruby
@@ -149,17 +171,17 @@ normalizy :amount, with: money: { type: :cents }
 # 420
 ```
 
-When you parse it back, the value need to be divided by `100` to be presented, but it will result in a value you do not want: `4.2` instead of the original `42.0`. Just provide a `delimiter`:
+When you parse it back, the value need to be divided by `100` to be presented, but it will result in a value you do not want: `4.2` instead of the original `42.0`. Just provide a `precision`:
 
 ```ruby
-normalizy :amount, with: money: { delimiter: 2 }
+normalizy :amount, with: money: { precision: 2 }
 
 '$ 42.0'
 # 42.00
 ```
 
 ```ruby
-normalizy :amount, with: money: { delimiter: 2, type: :cents }
+normalizy :amount, with: money: { precision: 2, type: :cents }
 
 '$ 42.0'
 # 4200
@@ -171,7 +193,7 @@ If you do not want pass it as options, Normalizy will fetch your I18n config:
 en:
   currency:
     format:
-      delimiter: 2
+      separator: 2
 ```
 
 And if it does not exists, `2` will be used as default.
@@ -218,6 +240,113 @@ normalizy :age, with: number: { cast: :to_i }
 ```
 
 By default, `number` works with value before [Type Cast](#type-cast).
+
+### Percent
+
+Transform a value to percent format.
+
+```ruby
+normalizy :amount, with: :percent
+
+'42.00 %'
+# '42.00'
+```
+
+#### separator
+
+The `separator` will be keeped on value to be possible cast the right integer value.
+You can change this separator:
+
+```ruby
+normalizy :amount, with: percent: { separator: ',' }
+
+'42,00 %'
+# '42,00'
+```
+
+If you do not want pass it as options, Normalizy will fetch your I18n config:
+
+```yaml
+en:
+  percentage:
+    format:
+      separator: '.'
+```
+
+And if it does not exists, `.` will be used as default.
+
+#### type
+
+You can retrieve the value in *integer* format, use the `type` options as `integer`:
+
+```ruby
+normalizy :amount, with: percent: { type: :integer }
+
+'42.00 %'
+# '4200'
+```
+
+#### precision
+
+As you could see on the last example, when using `type: :integer` is important the number of decimal digits.
+So, you can configure it to avoid the following error:
+
+```ruby
+normalizy :amount, with: percent: { type: :integer }
+
+'42.0 %'
+# 420
+```
+
+When you parse it back, the value need to be divided by `100` to be presented, but it will result in a value you do not want: `4.2` instead of the original `42.0`. Just provide a `precision`:
+
+```ruby
+normalizy :amount, with: percent: { precision: 2 }
+
+'42.0 %'
+# 42.00
+```
+
+```ruby
+normalizy :amount, with: percent: { precision: 2, type: :integer }
+
+'42.0 %'
+# 4200
+```
+
+If you do not want pass it as options, Normalizy will fetch your I18n config:
+
+```yaml
+en:
+  percentage:
+    format:
+      separator: 2
+```
+
+And if it does not exists, `2` will be used as default.
+
+#### cast
+
+If you need get a number over a normalized string in a number style, provide `cast` option with desired cast method:
+
+```ruby
+normalizy :amount, with: percent: { cast: :to_i }
+
+'42.00 %'
+# 4200
+```
+
+Just pay attention to avoid to use `type: :integer` together `cast` with float parses.
+Since `type` runs first, you will add decimal in a number that already is represented with decimal, but as integer:
+
+```ruby
+normalizy :amount, with: percent: { cast: :to_f, type: :integer }
+
+'42.00 %'
+# 4200.0
+```
+
+By default, `percent` works with value before [Type Cast](#type-cast).
 
 ### Strip
 

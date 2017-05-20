@@ -66,8 +66,6 @@ module Normalizy
           end
         end
 
-        return unless value
-
         write attribute, value
       end
 
