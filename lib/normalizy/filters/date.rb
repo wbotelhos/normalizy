@@ -5,13 +5,20 @@ module Normalizy
     module Date
       class << self
         def call(input, options = {})
-          return input unless input.is_a?(String)
+          if input.is_a?(String)
+            return input if input.blank?
 
-          return input if input.blank?
-
-          Time.use_zone(time_zone(options)) do
-            Time.zone.strptime(input, format(options))
+            Time.use_zone(time_zone(options)) do
+              input = Time.zone.strptime(input, format(options))
+            end
           end
+
+          if input.is_a?(Time) || input.is_a?(DateTime)
+            input = input.beginning_of_day if options[:adjust] == :begin
+            input = input.end_of_day       if options[:adjust] == :end
+          end
+
+          input
         rescue ArgumentError
           options[:object].errors.add options[:attribute], error_message(input, options)
         end
