@@ -67,6 +67,16 @@ RSpec.describe '#apply_normalizy' do
         end
       end
 
+      context 'as array of symbols' do
+        before { object.class.normalizy :name, with: [:downcase, :squish] }
+
+        specify do
+          object.save
+
+          expect(object.name).to eq 'washington fuck botelho'
+        end
+      end
+
       context 'as a hash' do
         context 'with a filter that does not accepts options' do
           before { object.class.normalizy :name, with: { squish: { ignored: true } } }
