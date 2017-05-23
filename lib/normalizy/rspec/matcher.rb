@@ -40,6 +40,7 @@ module Normalizy
 
         if @with.present?
           options = @subject.class.normalizy_rules[@attribute]
+          options = (options || []) + extract_defaults
 
           return false if options.blank?
 
@@ -78,6 +79,12 @@ module Normalizy
         value = @subject.send(@attribute)
 
         value.is_a?(String) ? %("#{value}") : value
+      end
+
+      def extract_defaults
+        [Normalizy.config.default_filters].flatten.compact.map do |rule|
+          { rules: rule }
+        end
       end
 
       def from_value
