@@ -79,6 +79,10 @@ RSpec.describe Normalizy::Filters::Money do
       it { expect(subject.call(1030.70  , type: :cents)).to be 1030.70 }
       it { expect(subject.call(10_300.70, type: :cents)).to be 10_300.70 }
 
+      context 'with different separator' do
+        it { expect(subject.call('1,7', separator: ',', type: :cents)).to eq '170' }
+      end
+
       context 'with two decimal precision' do
         it { expect(subject.call('1.70'    , type: :cents)).to eq '170' }
         it { expect(subject.call('103.70'  , type: :cents)).to eq '10370' }
@@ -137,7 +141,7 @@ RSpec.describe Normalizy::Filters::Money do
 
   context 'with :separator options' do
     context 'provided via options rule' do
-      it { expect(subject.call('1-2', separator: '-')).to eq '1.20' }
+      it { expect(subject.call('R$ 0,01', separator: ',')).to eq '0.01' }
     end
 
     context 'provided I18n' do

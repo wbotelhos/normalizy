@@ -5,27 +5,25 @@ module Normalizy
     extend ActiveSupport::Concern
 
     included do
-      before_validation :apply_normalizy, if: -> {
-        self.class.respond_to? :normalizy
-      }
-
       private
 
-      def apply_normalizy
-        (self.class.normalizy_rules || {}).each do |attribute, rules|
-          rules.each { |rule| normalizy! rule.merge(attribute: attribute) }
-        end
+      def extract_filter(rule, rule_options, attribute, filters: Normalizy.config.filters)
+        options = rule_options.merge(attribute: attribute, object: self)
+
+        return [filters[rule] || rule, options] unless rule.is_a?(Hash)
+
+        filter  = filters[rule.keys.first] || rule
+        options = (rule.values.first || {}).merge(options)
+
+        [filter, options]
       end
 
-      def extract_filter(rule, filters: Normalizy.config.filters)
+      def extract_rule(rule)
         if rule.is_a?(Hash)
-          result  = filters[rule.keys.first] || rule.keys.first
-          options = rule.values.first
+          [rule.keys.first, rule.values.first]
         else
-          result = filters[rule]
+          [rule, {}]
         end
-
-        [result || rule, options || {}]
       end
 
       def extract_value(value, filter, options, block)
@@ -36,7 +34,11 @@ module Normalizy
             filter.call value, &block
           end
         elsif respond_to?(filter)
-          send filter, value, options, &block
+          if method(filter).arity == -2
+            send filter, value, options, &block
+          else
+            send filter, value, &block
+          end
         elsif value.respond_to?(filter)
           value.send filter, &block
         else
@@ -44,49 +46,27 @@ module Normalizy
         end
       end
 
-      def normalizy!(attribute:, rules:, options:, block:)
+      def normalizy!(attribute:, block:, options:, rules:, value:)
+        rules ||= Normalizy.config.default_filters
+
         return if rules.blank? && block.blank?
 
-        aliases = Normalizy.config.normalizy_aliases
-        value   = nil
+        result = value
 
         [rules].flatten.compact.each do |rule|
-          result_rules = [aliases.key?(rule) ? aliases[rule] : rule]
+          rule_name, rule_options = extract_rule(rule)
 
-          result_rules.flatten.compact.each do |result_rule|
-            filter, filter_options = extract_filter(result_rule)
-
-            if filter.respond_to?(:name)
-              rule_name = filter.name.tableize.split('/').last.singularize.to_sym
-            end
-
-            original     = value || original_value(attribute, rule_name, options)
-            full_options = filter_options.merge(attribute: attribute, object: self)
-            value        = extract_value(original, filter, full_options, block)
+          unalias_for(rule_name).each do |rule|
+            filter, filter_options = extract_filter(rule, rule_options, attribute)
+            result                 = extract_value(result, filter, filter_options, block)
           end
         end
 
-        write attribute, value
+        result
       end
 
-      def original_value(attribute, rule, options)
-        if raw? attribute, rule, options
-          send "#{attribute}_before_type_cast"
-        else
-          send attribute
-        end
-      end
-
-      def raw?(attribute, rule, options)
-        return false unless respond_to?("#{attribute}_before_type_cast")
-
-        options[:raw] || Normalizy.config.normalizy_raws.include?(rule)
-      end
-
-      def write(attribute, value)
-        write_attribute attribute, value
-      rescue ActiveModel::MissingAttributeError
-        send "#{attribute}=", value
+      def unalias_for(rule, aliases: Normalizy.config.normalizy_aliases)
+        [aliases.key?(rule) ? aliases[rule] : rule].flatten.compact
       end
     end
 
@@ -95,7 +75,7 @@ module Normalizy
 
       def normalizy(*args, &block)
         options = args.extract_options!
-        rules   = options[:with] || Normalizy.config.default_filters
+        rules   = options[:with]
 
         self.normalizy_rules ||= {}
 
@@ -103,6 +83,22 @@ module Normalizy
           normalizy_rules[field] ||= []
           normalizy_rules[field] << { block: block, options: options.except(:with), rules: rules }
         end
+
+        prepend Module.new {
+          args.each do |attribute|
+            define_method :"#{attribute}=" do |value|
+              result = normalizy!(
+                attribute: attribute,
+                block:     block,
+                options:   options.except(:with),
+                rules:     rules,
+                value:     value
+              )
+
+              super result
+            end
+          end
+        }
       end
     end
   end

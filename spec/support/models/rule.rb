@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class Clean < ActiveRecord::Base
+class Rule < ActiveRecord::Base
 end

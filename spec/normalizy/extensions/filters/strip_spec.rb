@@ -2,20 +2,20 @@
 
 require 'rails_helper'
 
-RSpec.describe User, 'filters:strip' do
-  before do
-    described_class.normalizy_rules = {}
+RSpec.describe ModelStrip, 'filters:strip' do
+  specify do
+    expect(described_class.create(strip: '  Botelho  ').strip).to eq 'Botelho'
   end
 
   specify do
-    described_class.normalizy :name, with: :strip
-
-    expect(described_class.create(name: '  Washington  ').name).to eq 'Washington'
+    expect(described_class.create(strip_side_left: '  Botelho  ').strip_side_left).to eq 'Botelho  '
   end
 
   specify do
-    described_class.normalizy :name, with: { strip: { side: :left } }
+    expect(described_class.create(strip_side_right: '  Botelho  ').strip_side_right).to eq '  Botelho'
+  end
 
-    expect(described_class.create(name: '  Washington  ').name).to eq 'Washington  '
+  specify do
+    expect(described_class.create(strip_side_both: '  Botelho  ').strip_side_both).to eq 'Botelho'
   end
 end

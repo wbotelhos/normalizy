@@ -21,15 +21,15 @@ RSpec.describe Normalizy::Filters::Date do
   end
 
   context 'with invalid date' do
-    let!(:object)  { User.new }
-    let!(:options) { { attribute: :birthday, object: object } }
+    let!(:object)  { ModelDate.new }
+    let!(:options) { { attribute: :date, object: object } }
 
     context 'with i18n present' do
       before do
-        allow(I18n).to receive(:t).with(:birthday,
-          scope:   ['normalizy.errors.date', 'user'],
+        allow(I18n).to receive(:t).with(:date,
+          scope:   ['normalizy.errors.date', 'model_date'],
           value:   '1984-10-00',
-          default: '%{value} is an invalid date.') { 'birthday.error' }
+          default: '%{value} is an invalid date.') { 'date.error' }
       end
 
       it 'writes an error on object and does not set the values' do
@@ -37,8 +37,8 @@ RSpec.describe Normalizy::Filters::Date do
 
         subject.call '1984-10-00', options
 
-        expect(object.errors[:birthday]).to eq ['birthday.error']
-        expect(object.birthday).to          eq nil
+        expect(object.errors[:date]).to eq ['date.error']
+        expect(object.date).to          eq nil
       end
     end
 
@@ -48,8 +48,8 @@ RSpec.describe Normalizy::Filters::Date do
 
         subject.call '1984-10-00', options
 
-        expect(object.errors[:birthday]).to eq ['1984-10-00 is an invalid date.']
-        expect(object.birthday).to          eq nil
+        expect(object.errors[:date]).to eq ['1984-10-00 is an invalid date.']
+        expect(object.date).to          eq nil
       end
     end
   end

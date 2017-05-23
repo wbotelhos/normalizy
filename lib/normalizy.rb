@@ -17,4 +17,4 @@ require 'normalizy/config'
 require 'normalizy/extensions'
 require 'normalizy/rspec/matcher'
 
-ActiveRecord::Base.send :include, Normalizy::Extension
+ActiveRecord::Base.include Normalizy::Extension

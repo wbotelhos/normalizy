@@ -2,7 +2,7 @@
 
 module Normalizy
   module Filters
-    module Blacklist1
+    module Blacklist
       def self.call(input)
         input.gsub 'Fuck', 'filtered'
       end

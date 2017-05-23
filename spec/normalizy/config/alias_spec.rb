@@ -3,55 +3,27 @@
 require 'rails_helper'
 
 RSpec.describe Normalizy::Config, '#alias' do
-  context 'with no raw type' do
-    let!(:object) { User.new name: 'Washington Botelho' }
-
-    before do
-      object.class.normalizy_rules = {}
-
-      Normalizy.configure do |config|
-        config.alias :email, :downcase
-      end
+  it 'accepts alias' do
+    Normalizy.configure do |config|
+      config.alias :email, :downcase
     end
 
-    it 'alias one filter to others' do
-      object.class.normalizy :name, with: :email
-
-      object.save
-
-      expect(object.name).to eq 'washington botelho'
-    end
+    expect(Alias.create(email: 'Botelho').email).to eq 'botelho'
   end
 
-  context 'with raw type' do
-    before { User.normalizy_rules = {} }
-
-    context 'configured on setup' do
-      before do
-        Normalizy.configure do |config|
-          config.alias :age, :number, raw: true
-        end
-      end
-
-      it 'alias one filter to others' do
-        User.normalizy :age, with: :age
-
-        expect(User.create(age: '= 42').age).to eq 42
-      end
+  it 'accepts alias with options' do
+    Normalizy.configure do |config|
+      config.alias :with_arg, strip: { side: :left }
     end
 
-    context 'configured on normalizy' do
-      before do
-        Normalizy.configure do |config|
-          config.alias :age, :number
-        end
-      end
+    expect(Alias.create(with_arg_field: '  trim').with_arg_field).to eq 'trim'
+  end
 
-      it 'alias one filter to others' do
-        User.normalizy :age, with: :age, raw: true
-
-        expect(User.create(age: '= 42').age).to eq 42
-      end
+  it 'accepts late options' do
+    Normalizy.configure do |config|
+      config.alias :with_inline_arg, :strip
     end
+
+    expect(Alias.create(with_inline_arg_field: '  trim').with_inline_arg_field).to eq 'trim'
   end
 end
