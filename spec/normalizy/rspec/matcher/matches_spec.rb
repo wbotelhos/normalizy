@@ -51,7 +51,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
         config.default_filters = :squish
       end
 
-      matcher = described_class.new(:downcase_field)
+      matcher = described_class.new(:alone)
 
       matcher.with :squish
 
@@ -63,7 +63,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
         config.default_filters = [:squish]
       end
 
-      matcher = described_class.new(:downcase_field)
+      matcher = described_class.new(:alone)
 
       matcher.with :squish
 
@@ -75,11 +75,23 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
         config.default_filters = [{ strip: { side: :left } }]
       end
 
-      matcher = described_class.new(:downcase_field)
+      matcher = described_class.new(:alone)
 
       matcher.with(strip: { side: :left })
 
       expect(matcher.matches?(object)).to eq true
+    end
+
+    specify do
+      Normalizy.configure do |config|
+        config.default_filters = :squish
+      end
+
+      matcher = described_class.new(:downcase_field)
+
+      matcher.with :squish
+
+      expect(matcher.matches?(object)).to eq false
     end
   end
 
