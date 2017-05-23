@@ -1,3 +1,15 @@
+## v1.0.0
+
+- Changes:
+  - `raw` options was dropped since `prepend` already works before type cast;
+  - Multiple lines of `normalizy` will be evaluated from the bottom to top.
+
+- Features:
+  - `alias` configuration now accepts options;
+
+- Fixes:
+  - Multiple filters were not running together.
+
 ## v0.2.0
 
 - Changes:

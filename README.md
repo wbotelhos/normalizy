@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/wbotelhos/normalizy.svg)](https://travis-ci.org/wbotelhos/normalizy)
 [![Gem Version](https://badge.fury.io/rb/normalizy.svg)](https://badge.fury.io/rb/normalizy)
+[![Gratipay](https://img.shields.io/gratipay/user/wbotelhos.svg)](https://gratipay.com/normalizy)
 
 Attribute normalizer for ActiveRecord.
 
@@ -112,8 +113,6 @@ Tue, 23 Oct 1984 00:00:00 EDT -04:00
 # Tue, 23 Oct 1984 11:59:59 EDT -04:00
 ```
 
-By default, `number` works with value before [Type Cast](#type-cast).
-
 ### Money
 
 Transform a value to money format.
@@ -219,8 +218,6 @@ normalizy :amount, with: money: { cast: :to_f, type: :cents }
 # 4200.0
 ```
 
-By default, `money` works with value before [Type Cast](#type-cast).
-
 ### Number
 
 ```ruby
@@ -238,8 +235,6 @@ normalizy :age, with: number: { cast: :to_i }
 ' 32x'
 # 32
 ```
-
-By default, `number` works with value before [Type Cast](#type-cast).
 
 ### Percent
 
@@ -346,8 +341,6 @@ normalizy :amount, with: percent: { cast: :to_f, type: :integer }
 # 4200.0
 ```
 
-By default, `percent` works with value before [Type Cast](#type-cast).
-
 ### Strip
 
 Options:
@@ -392,25 +385,32 @@ normalizy :name, with: %i[squish titleize]
 
 ## Multiple Attributes
 
-You can normalize more than one attribute at once too, with one or muiltiple filters:
+You can normalize more than one attribute at once too, with one or multiple filters:
 
 ```ruby
 normalizy :email, :username, with: :downcase
 ```
 
-Of course you can declare muiltiples attribute and multiple filters, either.
-It is possible to make sequential normalizy calls:
+Of course you can declare multiple attribute and multiple filters, either.
+It is possible to make sequential normalizy calls, but *take care*!
+Since we use `prepend` module the last line will run first then others:
 
 ```ruby
-normalizy :email, :username, with: :squish
-normalizy :email           , with: :downcase
+normalizy :username, with: :downcase
+normalizy :username, with: :titleize
+
+'BoteLho'
+# 'bote lho'
 ```
 
-In this case, each line will be evaluated from the top to the bottom.
+As you can see, `titleize` runs first then `downcase`.
+Each line will be evaluated from the *bottom* to the *top*.
+If it is hard to you accept, use [Muiltiple Filters](#multiple-filters)
 
 ## Default Filters
 
-You can configure some default filters to be runned. Edit initializer at `config/initializers/normalizy.rb`:
+You can configure some default filters to be runned.
+Edit initializer at `config/initializers/normalizy.rb`:
 
 ```ruby
 Normalizy.configure do |config|
@@ -418,7 +418,7 @@ Normalizy.configure do |config|
 end
 ```
 
-Now, all normalization will include squish, even when no rule is declared.
+Now, all normalization will include `squish`, even when no rule is declared.
 
 ```ruby
 normalizy :name
@@ -580,37 +580,6 @@ Normalizy.configure do |config|
 end
 ```
 
-## Type Cast
-
-An input field with `= 42` value when sent to model with a field as `integer` type,
-will be converted to `0`, since the type does not match. But you want to use the value before Rails cast the type.
-
-To receive the value before type cast, just pass a `raw` options as `true`:
-
-```ruby
-normalizy :amount, with: :number, raw: true
-
-'= 42'
-# 42
-```
-
-To avoid repeat the `raw: true` when you have multiple uses, you can register a filter:
-
-```ruby
-Normalizy.configure do |config|
-  config.add :raw_number, ->(input) { input.gsub(/\D/, '') }, raw: true
-end
-```
-
-And use it in short version:
-
-```ruby
-normalizy :amount, with: :raw_number
-
-'= 42'
-# 42
-```
-
 ## Alias
 
 Sometimes you want to give a better name to your filter, just to keep the things semantic.
@@ -623,13 +592,6 @@ end
 ```
 
 Now, `age` will delegate to `number` filter.
-Since we already know the need of `raw` options, we can declare it here:
-
-```ruby
-Normalizy.configure do |config|
-  config.alias :age, :number, raw: true
-end
-```
 
 And now, the aliased filter will work fine:
 
@@ -645,6 +607,14 @@ If you need to alias multiple filters, just provide an array of them:
 ```ruby
 Normalizy.configure do |config|
   config.alias :username, %i[squish downcase]
+end
+```
+
+Alias accepts options parameters too:
+
+```ruby
+Normalizy.configure do |config|
+  config.alias :left_trim, trim: { side: :left }
 end
 ```
 
@@ -685,4 +655,4 @@ it { is_expected.to normalizy(:email).with(trim: { side: :left }) }
 
 ## Love it!
 
-Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=normalizy) or [Gratipay](https://gratipay.com/~wbotelhos). Thanks! (:
+Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=normalizy) or [Gratipay](https://gratipay.com/normalizy). Thanks! (:
