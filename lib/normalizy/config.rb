@@ -5,19 +5,16 @@ require 'normalizy/filters'
 module Normalizy
   class Config
     attr_accessor :default_filters
-    attr_reader :filters, :normalizy_aliases, :normalizy_raws
+    attr_reader :filters, :normalizy_aliases
 
-    def add(name, value, raw: false)
+    def add(name, value)
       @filters[name] = value
-
-      @normalizy_raws << name if raw
 
       self
     end
 
-    def alias(name, to, raw: false)
+    def alias(name, to)
       @normalizy_aliases[name] = to
-      @normalizy_raws << name if raw
 
       self
     end
@@ -25,7 +22,6 @@ module Normalizy
     def initialize
       @default_filters   = {}
       @normalizy_aliases = {}
-      @normalizy_raws    = %i[date money number percent]
 
       @filters = {
         date:    Normalizy::Filters::Date,
