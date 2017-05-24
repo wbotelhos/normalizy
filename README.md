@@ -32,11 +32,11 @@ On your model, just add `normalizy` callback with the attribute you want to norm
 
 ```ruby
 class User < ApplicationRecord
-  normalizy :name, with: :strip
+  normalizy :name, with: :downcase
 end
 ```
 
-Now some email like `  myemail@example.com  ` will be saved as `email@example.com`.
+Now some email like `MyEmail@Example.com` will be saved as `myemail@example.com`.
 
 ## Filters
 
