@@ -1,3 +1,8 @@
+## v1.0.1
+
+- Fixes:
+  - When `type` options was `cents` and had no decimal on number, extra decimal were added.
+
 ## v1.0.0
 
 - Changes:
