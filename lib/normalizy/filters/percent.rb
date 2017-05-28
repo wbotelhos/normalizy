@@ -11,8 +11,13 @@ module Normalizy
 
           return nil if value.blank?
 
-          value = "%0.#{precision(options)}f" % [value.sub(separator(options), '.')]
-          value = value.delete('.') if cents?(options)
+          if cents?(options)
+            if value.include? separator(options)
+              value = precisioned(value, options).delete('.')
+            end
+          else
+            value = precisioned(value, options)
+          end
 
           return value.send(options[:cast]) if options[:cast]
 
@@ -27,6 +32,10 @@ module Normalizy
 
         def precision(options)
           options.fetch :precision, I18n.t('percentage.format.precision', default: 2)
+        end
+
+        def precisioned(value, options)
+          "%0.#{precision(options)}f" % [value.sub(separator(options), '.')]
         end
 
         def separator(options)
