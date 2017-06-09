@@ -71,7 +71,7 @@ normalizy :birthday, with: date: { format: '%y/%m/%d' }
 To convert the date on your time zone, just provide the `time_zone` option:
 
 ```ruby
-normalizy :birthday, with: date: { time_zone: '%y/%m/%d' }
+normalizy :birthday, with: date: { time_zone: Time.zone }
 
 '1984-10-23'
 # Tue, 23 Oct 1984 00:00:00 EDT -04:00
