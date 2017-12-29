@@ -1,3 +1,8 @@
+## v1.1.0
+
+- Features:
+  - Added `slug` filter with option to apply the value on other field.
+
 ## v1.0.1
 
 - Fixes:

@@ -343,6 +343,29 @@ normalizy :amount, with: { percent: { cast: :to_f, type: :integer } }
 # 4200.0
 ```
 
+### Slug
+
+Convert texto to slug.
+
+```ruby
+normalizy :slug, with: :slug
+'Washington é Botelho'
+# 'washington-e-botelho'
+```
+
+#### to
+
+You can slug a field based on other just sending the result value.
+
+```ruby
+normalizy :title, with: { slug: { to: :slug } }
+
+model.title = 'Washington é Botelho'
+
+model.slug
+# 'washington-e-botelho'
+```
+
 ### Strip
 
 Cleans edge spaces.

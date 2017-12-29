@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    normalizy (1.0.1)
+    normalizy (1.1.0)
       rails (>= 4.1, < 6)
 
 GEM
