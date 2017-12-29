@@ -103,14 +103,14 @@ RSpec.describe Normalizy::Filters::Percent do
   end
 
   describe 'separator' do
-    context 'provided inline' do
+    context 'when provided inline' do
       it { expect(subject.call('R$ 0,01', separator: ',')).to eq '0.01' }
     end
 
-    context 'provided I18n' do
+    context 'when provided I18n' do
       before do
-        allow(I18n).to receive(:t).with('percentage.format.separator', default: '.') { 'x' }
-        allow(I18n).to receive(:t).with('percentage.format.precision', default: 2) { 2 }
+        allow(I18n).to receive(:t).with('percentage.format.separator', default: '.').and_return 'x'
+        allow(I18n).to receive(:t).with('percentage.format.precision', default: 2).and_return 2
       end
 
       it { expect(subject.call('1x2')).to eq '1.20' }
@@ -139,7 +139,7 @@ RSpec.describe Normalizy::Filters::Percent do
       it { expect(subject.call('$ 1030.7' , cast: :to_f)).to eq 1030.7 }
       it { expect(subject.call('$ 10300.7', cast: :to_f)).to eq 10_300.7 }
 
-      context 'and calls cast' do
+      context 'with calls cast' do
         it { expect(subject.call('1.7'    , cast: :to_f)).to be 1.7 }
         it { expect(subject.call('103.7'  , cast: :to_f)).to be 103.7 }
         it { expect(subject.call('1030.7' , cast: :to_f)).to be 1030.7 }

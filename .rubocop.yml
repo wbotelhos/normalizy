@@ -8,8 +8,26 @@ AllCops:
 Rails:
   Enabled: true
 
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/SpaceBeforeComma:
+  Enabled: false
+
+Layout/SpaceBeforeFirstArg:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'lib/normalizy/extensions.rb'
+
 Lint/Debugger:
   Enabled: false
+
+Lint/UnusedMethodArgument:
+  Exclude:
+    - 'lib/normalizy/extensions.rb'
+    - 'lib/normalizy/filters/slug.rb'
 
 Metrics/AbcSize:
   Enabled: false
@@ -20,13 +38,19 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Enabled: false
 
-Metrics/LineLength:
+Metrics/BlockLength:
   Enabled: false
+
+Metrics/LineLength:
+  Max: 120
 
 Metrics/MethodLength:
   Enabled: false
 
 Metrics/PerceivedComplexity:
+  Enabled: false
+
+Rails/ApplicationRecord:
   Enabled: false
 
 Rails/HasAndBelongsToMany:
@@ -35,8 +59,32 @@ Rails/HasAndBelongsToMany:
 Rails/HttpPositionalArguments:
   Enabled: false
 
-Style/IfUnlessModifier:
-  MaxLineLength: 0
+Rails/TimeZone:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/DescribeMethod:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 18
+
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
@@ -46,17 +94,8 @@ Style/PercentLiteralDelimiters:
     '%w': '[]'
     '%W': '[]'
 
-Style/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
-
 Style/Documentation:
   Enabled: false
 
 Style/Encoding:
-  Enabled: false
-
-Style/SpaceBeforeComma:
-  Enabled: false
-
-Style/SpaceBeforeFirstArg:
   Enabled: false

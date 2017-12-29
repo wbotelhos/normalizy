@@ -27,9 +27,11 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
     end
 
     specify do
+      expected = { name: [{ block: nil, options: {}, rules: [:upcase, 'blank', { trim: { side: :left } }] }] }
+
       model.normalizy :name, with: [:upcase, 'blank', { trim: { side: :left } }]
 
-      expect(model.normalizy_rules).to eq(name: [{ block: nil, options: {}, rules: [:upcase, 'blank', { trim: { side: :left } }] }])
+      expect(model.normalizy_rules).to eq expected
     end
 
     specify do

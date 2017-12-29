@@ -56,8 +56,8 @@ module Normalizy
         [rules].flatten.compact.each do |rule|
           rule_name, rule_options = extract_rule(rule)
 
-          unalias_for(rule_name).each do |rule|
-            filter, filter_options = extract_filter(rule, rule_options, attribute)
+          unalias_for(rule_name).each do |unaliased_rule|
+            filter, filter_options = extract_filter(unaliased_rule, rule_options, attribute)
             result                 = extract_value(result, filter, filter_options, block)
           end
         end
