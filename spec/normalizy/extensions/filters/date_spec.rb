@@ -16,7 +16,7 @@ RSpec.describe ModelDate, 'filters:date' do
   end
 
   specify do
-    hours    = offset_in_hours('America/Sao_Paulo')
+    hours    = ActiveSupport::TimeZone['Brasilia'].utc_offset / 3600.0
     expected = Time.new(1984, 10, 23, 0, 0, 0, 0) + (hours.hours * -1)
 
     expect(described_class.create(date_time_zone: '1984-10-23').date_time_zone).to eq expected
