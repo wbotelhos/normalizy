@@ -60,7 +60,7 @@ By default, the date is treat as `%F` format and as `UTC` time.
 You can change the format using the `format` options:
 
 ```ruby
-normalizy :birthday, with: date: { format: '%y/%m/%d' }
+normalizy :birthday, with: { date: { format: '%y/%m/%d' } }
 
 '84/10/23'
 # Tue, 23 Oct 1984 00:00:00 UTC +00:00
@@ -71,7 +71,7 @@ normalizy :birthday, with: date: { format: '%y/%m/%d' }
 To convert the date on your time zone, just provide the `time_zone` option:
 
 ```ruby
-normalizy :birthday, with: date: { time_zone: Time.zone }
+normalizy :birthday, with: { date: { time_zone: Time.zone } }
 
 '1984-10-23'
 # Tue, 23 Oct 1984 00:00:00 EDT -04:00
@@ -98,7 +98,7 @@ If no configuration is provided, the default message will be `'%{value} is an in
 If your model receive a `Time` or `DateTime`, you can provide `adjust` options to change you time to begin o the day:
 
 ```ruby
-normalizy :birthday, with: date: { adjust: :begin }
+normalizy :birthday, with: { date: { adjust: :begin } }
 
 Tue, 23 Oct 1984 11:30:00 EDT -04:00
 # Tue, 23 Oct 1984 00:00:00 EDT -04:00
@@ -107,7 +107,7 @@ Tue, 23 Oct 1984 11:30:00 EDT -04:00
 Or to the end of the day:
 
 ```ruby
-normalizy :birthday, with: date: { adjust: :end }
+normalizy :birthday, with: { date: { adjust: :end } }
 
 Tue, 23 Oct 1984 00:00:00 EDT -04:00
 # Tue, 23 Oct 1984 11:59:59 EDT -04:00
@@ -130,7 +130,7 @@ The `separator` will be keeped on value to be possible cast the right integer va
 You can change this separator:
 
 ```ruby
-normalizy :amount, with: money: { separator: ',' }
+normalizy :amount, with: { money: { separator: ',' } }
 
 'R$ 42,00'
 # '42,00'
@@ -152,7 +152,7 @@ And if it does not exists, `.` will be used as default.
 You can retrieve the value in *cents* format, use the `type` options as `cents`:
 
 ```ruby
-normalizy :amount, with: money: { type: :cents }
+normalizy :amount, with: { money: { type: :cents } }
 
 '$ 42.00'
 # '4200'
@@ -164,7 +164,7 @@ As you could see on the last example, when using `type: :cents` is important the
 So, you can configure it to avoid the following error:
 
 ```ruby
-normalizy :amount, with: money: { type: :cents }
+normalizy :amount, with: { money: { type: :cents } }
 
 '$ 42.0'
 # 420
@@ -173,14 +173,14 @@ normalizy :amount, with: money: { type: :cents }
 When you parse it back, the value need to be divided by `100` to be presented, but it will result in a value you do not want: `4.2` instead of the original `42.0`. Just provide a `precision`:
 
 ```ruby
-normalizy :amount, with: money: { precision: 2 }
+normalizy :amount, with: { money: { precision: 2 } }
 
 '$ 42.0'
 # 42.00
 ```
 
 ```ruby
-normalizy :amount, with: money: { precision: 2, type: :cents }
+normalizy :amount, with: { money: { precision: 2, type: :cents } }
 
 '$ 42.0'
 # 4200
@@ -202,7 +202,7 @@ And if it does not exists, `2` will be used as default.
 If you need get a number over a normalized string in a number style, provide `cast` option with desired cast method:
 
 ```ruby
-normalizy :amount, with: money: { cast: :to_i }
+normalizy :amount, with: { money: { cast: :to_i } }
 
 '$ 42.00'
 # 4200
@@ -212,13 +212,15 @@ Just pay attention to avoid to use `type: :cents` together `cast` with float par
 Since `type` runs first, you will add decimal in a number that already is represented with decimal, but as integer:
 
 ```ruby
-normalizy :amount, with: money: { cast: :to_f, type: :cents }
+normalizy :amount, with: { money: { cast: :to_f, type: :cents } }
 
 '$ 42.00'
 # 4200.0
 ```
 
 ### Number
+
+Transform text to valid number.
 
 ```ruby
 normalizy :age, with: :number
@@ -230,7 +232,7 @@ normalizy :age, with: :number
 If you want cast the value, provide `cast` option with desired cast method:
 
 ```ruby
-normalizy :age, with: number: { cast: :to_i }
+normalizy :age, with: { number: { cast: :to_i } }
 
 ' 32x'
 # 32
@@ -238,7 +240,7 @@ normalizy :age, with: number: { cast: :to_i }
 
 ### Percent
 
-Transform a value to percent format.
+Transform a value to a valid percent format.
 
 ```ruby
 normalizy :amount, with: :percent
@@ -253,7 +255,7 @@ The `separator` will be keeped on value to be possible cast the right integer va
 You can change this separator:
 
 ```ruby
-normalizy :amount, with: percent: { separator: ',' }
+normalizy :amount, with: { percent: { separator: ',' } }
 
 '42,00 %'
 # '42,00'
@@ -275,7 +277,7 @@ And if it does not exists, `.` will be used as default.
 You can retrieve the value in *integer* format, use the `type` options as `integer`:
 
 ```ruby
-normalizy :amount, with: percent: { type: :integer }
+normalizy :amount, with: { percent: { type: :integer } }
 
 '42.00 %'
 # '4200'
@@ -287,7 +289,7 @@ As you could see on the last example, when using `type: :integer` is important t
 So, you can configure it to avoid the following error:
 
 ```ruby
-normalizy :amount, with: percent: { type: :integer }
+normalizy :amount, with: { percent: { type: :integer } }
 
 '42.0 %'
 # 420
@@ -296,14 +298,14 @@ normalizy :amount, with: percent: { type: :integer }
 When you parse it back, the value need to be divided by `100` to be presented, but it will result in a value you do not want: `4.2` instead of the original `42.0`. Just provide a `precision`:
 
 ```ruby
-normalizy :amount, with: percent: { precision: 2 }
+normalizy :amount, with: { percent: { precision: 2 } }
 
 '42.0 %'
 # 42.00
 ```
 
 ```ruby
-normalizy :amount, with: percent: { precision: 2, type: :integer }
+normalizy :amount, with: { percent: { precision: 2, type: :integer } }
 
 '42.0 %'
 # 4200
@@ -325,7 +327,7 @@ And if it does not exists, `2` will be used as default.
 If you need get a number over a normalized string in a number style, provide `cast` option with desired cast method:
 
 ```ruby
-normalizy :amount, with: percent: { cast: :to_i }
+normalizy :amount, with: { percent: { cast: :to_i } }
 
 '42.00 %'
 # 4200
@@ -335,13 +337,15 @@ Just pay attention to avoid to use `type: :integer` together `cast` with float p
 Since `type` runs first, you will add decimal in a number that already is represented with decimal, but as integer:
 
 ```ruby
-normalizy :amount, with: percent: { cast: :to_f, type: :integer }
+normalizy :amount, with: { percent: { cast: :to_f, type: :integer } }
 
 '42.00 %'
 # 4200.0
 ```
 
 ### Strip
+
+Cleans edge spaces.
 
 Options:
 
@@ -378,7 +382,7 @@ As you can see, the rules can be passed as Symbol/String or as Hash if it has op
 You can normalize with a couple of filters at once:
 
 ```ruby
-normalizy :name, with: %i[squish titleize]
+normalizy :name, with: { %i[squish titleize] }
 '  washington  botelho  '
 # 'Washington Botelho'
 ```
@@ -482,7 +486,7 @@ end
 ```
 
 ```ruby
-normalizy :name, with: blacklist: { replacement: '---' }
+normalizy :name, with: { blacklist: { replacement: '---' } }
 
 'Washington Fuck Botelho'
 # 'Washington --- Botelho'
@@ -514,7 +518,7 @@ end
 ```
 
 ```ruby
-normalizy :name, with: :blacklist, &->(value) { value.sub('filtered', '(filtered 2x)') }
+normalizy :name, with: { :blacklist, &->(value) { value.sub('filtered', '(filtered 2x)') } }
 
 'Washington Fuck Botelho'
 # 'Washington (filtered 2x) Botelho'
