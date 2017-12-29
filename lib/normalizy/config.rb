@@ -28,6 +28,7 @@ module Normalizy
         money:   Normalizy::Filters::Money,
         number:  Normalizy::Filters::Number,
         percent: Normalizy::Filters::Percent,
+        slug:    Normalizy::Filters::Slug,
         strip:   Normalizy::Filters::Strip
       }
     end

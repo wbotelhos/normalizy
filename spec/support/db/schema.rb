@@ -63,6 +63,12 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer :cents_type_and_cast_to_i
   end
 
+  create_table :model_slugs do |t|
+    t.string :permalink
+    t.string :slug
+    t.string :title
+  end
+
   create_table :model_strips do |t|
     t.string :strip
     t.string :strip_side_both
