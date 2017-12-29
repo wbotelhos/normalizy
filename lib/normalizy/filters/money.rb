@@ -12,9 +12,7 @@ module Normalizy
           return nil if value.blank?
 
           if cents?(options)
-            if value.include? separator(options)
-              value = precisioned(value, options).delete('.')
-            end
+            value = precisioned(value, options).delete('.') if value.include? separator(options)
           else
             value = precisioned(value, options)
           end
@@ -35,7 +33,7 @@ module Normalizy
         end
 
         def precisioned(value, options)
-          "%0.#{precision(options)}f" % [value.sub(separator(options), '.')]
+          format("%0.#{precision(options)}f", value.sub(separator(options), '.'))
         end
 
         def separator(options)

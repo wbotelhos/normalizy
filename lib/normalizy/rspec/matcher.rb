@@ -43,9 +43,7 @@ module Normalizy
 
           return false if options.blank?
 
-          if options.map { |option| option[:rules] }.compact.blank?
-            options = default_rules
-          end
+          options = default_rules if options.map { |option| option[:rules] }.compact.blank?
 
           return false if options.blank?
 
@@ -113,13 +111,9 @@ module Normalizy
         result = options.map do |option|
           rules = option[:rules]
 
-          if rules.nil?
-            :nil
-          elsif rules.blank?
-            %("#{rules}")
-          else
-            rules
-          end
+          return :nil if rules.nil?
+
+          rules.presence || %("#{rules}")
         end
 
         result.join ', '
