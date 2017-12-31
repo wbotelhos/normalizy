@@ -1,3 +1,8 @@
+## v1.1.1
+
+- Fixes:
+  - When use `slug` filter the original values was not saved.
+
 ## v1.1.0
 
 - Features:
