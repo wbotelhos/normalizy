@@ -97,6 +97,8 @@ module Normalizy
 
               if rules.is_a?(Hash) && rules.dig(:slug, :to).present?
                 write_attribute rules.dig(:slug, :to), result
+
+                super value
               else
                 super result
               end

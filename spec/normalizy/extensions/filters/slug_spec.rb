@@ -9,4 +9,6 @@ RSpec.describe ModelSlug, 'filters:slug' do
   specify { expect(described_class.create(permalink: from).permalink).to eq to }
 
   specify { expect(described_class.create(title: from).slug).to eq to }
+
+  specify { expect(described_class.create(title: from).title).to eq from }
 end
