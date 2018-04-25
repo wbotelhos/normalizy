@@ -117,7 +117,6 @@ DEPENDENCIES
   normalizy!
   pry-byebug
   rspec-rails
-  rubocop
   rubocop-rspec
   sqlite3
 
