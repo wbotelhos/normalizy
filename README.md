@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/wbotelhos/normalizy.svg)](https://travis-ci.org/wbotelhos/normalizy)
 [![Gem Version](https://badge.fury.io/rb/normalizy.svg)](https://badge.fury.io/rb/normalizy)
-[![Gratipay](https://img.shields.io/gratipay/user/wbotelhos.svg)](https://gratipay.com/normalizy)
+[![Patreon](https://img.shields.io/badge/donate-%3C3-brightgreen.svg)](https://www.patreon.com/wbotelhos)
 
 Attribute normalizer for ActiveRecord.
 
@@ -679,7 +679,3 @@ it { is_expected.to normalizy(:email).with %i[downcase squish] }
 ```ruby
 it { is_expected.to normalizy(:email).with(trim: { side: :left }) }
 ```
-
-## Love it!
-
-Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=normalizy) or [Gratipay](https://gratipay.com/normalizy). Thanks! (:
