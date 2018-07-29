@@ -7,7 +7,7 @@ module Normalizy
         def call(input, options = {})
           return input unless input.is_a?(String)
 
-          value = input.gsub(/[^[0-9]#{separator(options)}]/, '')
+          value = input.gsub(/[^[0-9-]#{separator(options)}]/, '')
 
           return nil if value.blank?
 
