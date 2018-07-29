@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe ModelNumber, 'filters:number' do
-  specify do
+  it do
     expect(described_class.create(number: 'Botelho 32').number).to eq '32'
   end
 end

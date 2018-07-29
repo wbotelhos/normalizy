@@ -14,19 +14,19 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       end
     end
 
-    specify do
+    it do
       model.normalizy :name
 
       expect(model.normalizy_rules).to eq(name: [{ block: nil, options: {}, rules: nil }])
     end
 
-    specify do
+    it do
       model.normalizy :name, with: :upcase
 
       expect(model.normalizy_rules).to eq(name: [{ block: nil, options: {}, rules: :upcase }])
     end
 
-    specify do
+    it do
       expected = { name: [{ block: nil, options: {}, rules: [:upcase, 'blank', { trim: { side: :left } }] }] }
 
       model.normalizy :name, with: [:upcase, 'blank', { trim: { side: :left } }]
@@ -34,7 +34,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       expect(model.normalizy_rules).to eq expected
     end
 
-    specify do
+    it do
       model.normalizy :name, with: [:upcase, { trim: { side: :left } }]
       model.normalizy :name, with: :squish
       model.normalizy :name, with: [:upcase, { trim: { side: :right } }]
@@ -50,7 +50,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       )
     end
 
-    specify do
+    it do
       model.normalizy :email, :name
 
       expect(model.normalizy_rules).to eq(
@@ -59,7 +59,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       )
     end
 
-    specify do
+    it do
       model.normalizy :email, :name, with: :upcase
 
       expect(model.normalizy_rules).to eq(
@@ -68,7 +68,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       )
     end
 
-    specify do
+    it do
       model.normalizy :email, :name, with: [:upcase, :blank, { trim: { side: :left } }]
 
       expect(model.normalizy_rules).to eq(
@@ -77,7 +77,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       )
     end
 
-    specify do
+    it do
       model.normalizy :email, :name, with: [:upcase, { trim: { side: :left } }]
       model.normalizy :email, :name, with: :squish
       model.normalizy :email, :name, with: [:upcase, { trim: { side: :right } }]
@@ -107,25 +107,25 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       end
     end
 
-    specify do
+    it do
       model.normalizy :name
 
       expect(model.normalizy_rules).to eq(name: [{ block: nil, options: {}, rules: nil }])
     end
 
-    specify do
+    it do
       model.normalizy :name, with: :upcase
 
       expect(model.normalizy_rules).to eq(name: [{ block: nil, options: {}, rules: :upcase }])
     end
 
-    specify do
+    it do
       model.normalizy :name, with: %i[upcase blank]
 
       expect(model.normalizy_rules).to eq(name: [{ block: nil, options: {}, rules: %i[upcase blank] }])
     end
 
-    specify do
+    it do
       model.normalizy :name, with: :upcase
       model.normalizy :name, with: :squish
       model.normalizy :name, with: :upcase
@@ -139,7 +139,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       )
     end
 
-    specify do
+    it do
       model.normalizy :email, :name
 
       expect(model.normalizy_rules).to eq(
@@ -148,7 +148,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       )
     end
 
-    specify do
+    it do
       model.normalizy :email, :name, with: :upcase
 
       expect(model.normalizy_rules).to eq(
@@ -157,7 +157,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       )
     end
 
-    specify do
+    it do
       model.normalizy :email, :name, with: %i[upcase blank]
 
       expect(model.normalizy_rules).to eq(
@@ -166,7 +166,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
       )
     end
 
-    specify do
+    it do
       model.normalizy :email, :name, with: :upcase
       model.normalizy :email, :name, with: :squish
       model.normalizy :email, :name, with: :upcase
@@ -189,7 +189,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
   context 'when block is given' do
     let!(:block) { ->(value) { value.downcase } }
 
-    specify do
+    it do
       model.normalizy :name, &block
 
       expect(model.normalizy_rules[:name][0][:block]).to eq block

@@ -6,7 +6,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.description' do
   let!(:matcher) { described_class.new :name }
 
   context 'with no :with expectation' do
-    specify do
+    it do
       matcher.from :from
       matcher.to   :to
 
@@ -15,7 +15,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.description' do
   end
 
   context 'with :with expectation' do
-    specify do
+    it do
       matcher.with :blank
 
       matcher.from :from

@@ -6,7 +6,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.failure_message_when_negated' do
   let!(:model) { Match }
 
   context 'with no :with expectation' do
-    specify do
+    it do
       matcher = described_class.new(:downcase_field)
 
       matcher.from 'from'
@@ -18,7 +18,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.failure_message_when_negated' do
   end
 
   context 'with :with expectation' do
-    specify do
+    it do
       matcher = described_class.new(:downcase_field)
 
       matcher.with :downcase
