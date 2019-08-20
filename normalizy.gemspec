@@ -23,6 +23,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rspec-rails'
+  spec.add_development_dependency 'rubocop-performance'
+  spec.add_development_dependency 'rubocop-rails'
   spec.add_development_dependency 'rubocop-rspec'
   spec.add_development_dependency 'sqlite3'
 end
