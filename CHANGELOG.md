@@ -1,7 +1,12 @@
+## v1.3.0
+
+- Changes:
+ - Support Rails 6.
+
 ## v1.2.0
 
 - Features:
- - `money` filter now allows negative numbers.
+  - `money` filter now allows negative numbers.
 
 ## v1.1.1
 
