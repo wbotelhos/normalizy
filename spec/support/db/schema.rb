@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.string :module_one_arg
     t.string :module_two_args
     t.string :module_and_block
-    t.string :module_and_block
     t.string :method_with_no_options_field
     t.string :method_with_options_field
     t.string :native
