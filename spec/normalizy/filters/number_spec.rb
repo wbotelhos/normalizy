@@ -14,6 +14,7 @@ RSpec.describe Normalizy::Filters::Number do
     it { expect(subject.call(nil)).to                         eq nil }
     it { expect(subject.call('nil')).to                       eq nil }
     it { expect(subject.call('')).to                          eq nil }
+    it { expect(subject.call('1 2 3')).to                     eq '123' }
   end
 
   context 'with :cast' do
@@ -27,5 +28,6 @@ RSpec.describe Normalizy::Filters::Number do
     it { expect(subject.call(nil, cast: :to_i)).to                         eq nil }
     it { expect(subject.call('nil', cast: :to_i)).to                       eq nil }
     it { expect(subject.call('', cast: :to_i)).to                          eq nil }
+    it { expect(subject.call('1 2 3', cast: :to_i)).to                     eq 123 }
   end
 end
