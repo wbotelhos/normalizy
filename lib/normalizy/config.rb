@@ -29,7 +29,8 @@ module Normalizy
         number:  Normalizy::Filters::Number,
         percent: Normalizy::Filters::Percent,
         slug:    Normalizy::Filters::Slug,
-        strip:   Normalizy::Filters::Strip
+        strip:   Normalizy::Filters::Strip,
+        truncate: Normalizy::Filters::Truncate,
       }
     end
   end
