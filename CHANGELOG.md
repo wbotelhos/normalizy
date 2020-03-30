@@ -1,6 +1,12 @@
+## v1.5.0
+
+- Features:
+  - Filter `date` now supports call object that respond to `beginning_of_day` or `end_of_day`;
+
 ## v1.4.0
 
-- Adds `date` support for `Date` class.
+- Features:
+  - Adds `date` support for `Date` class.
 
 ## v1.3.0
 
