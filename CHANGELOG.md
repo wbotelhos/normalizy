@@ -1,3 +1,7 @@
+## v1.4.0
+
+- Adds `date` support for `Date` class.
+
 ## v1.3.0
 
 - Changes:
