@@ -13,10 +13,8 @@ module Normalizy
             end
           end
 
-          if [::Date, DateTime, Time].include?(input.class)
-            input = input.beginning_of_day if options[:adjust] == :begin
-            input = input.end_of_day       if options[:adjust] == :end
-          end
+          input = input.beginning_of_day if options[:adjust] == :begin && input.respond_to?(:beginning_of_day)
+          input = input.end_of_day       if options[:adjust] == :end   && input.respond_to?(:end_of_day)
 
           input
         rescue ArgumentError

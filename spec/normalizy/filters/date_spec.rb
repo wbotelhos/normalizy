@@ -15,6 +15,9 @@ RSpec.describe Normalizy::Filters::Date do
   it { expect(subject.call(DateTime.new(1984, 1, 1, 1), adjust: :begin)).to eq DateTime.new(1984) }
   it { expect(subject.call(DateTime.new(1984), adjust: :end)).to eq DateTime.new(1984).end_of_day }
 
+  it { expect(subject.call(OpenStruct.new(beginning_of_day: :success), adjust: :begin)).to eq :success }
+  it { expect(subject.call(OpenStruct.new(end_of_day: :success), adjust: :end)).to eq :success }
+
   it do
     result = subject.call(Date.new(1984, 10, 23), adjust: :end)
 
