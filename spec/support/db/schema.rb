@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 0) do
   create_table :model_dates do |t|
     t.datetime :date
     t.datetime :date_format
+    t.datetime :date_time_begin
+    t.datetime :date_time_end
     t.datetime :date_time_zone
   end
 

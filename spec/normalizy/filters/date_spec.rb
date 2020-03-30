@@ -9,8 +9,27 @@ RSpec.describe Normalizy::Filters::Date do
 
   it { expect(subject.call('84/10/23', format: '%y/%m/%d')).to eq Time.new(1984, 10, 23, 0, 0, 0, 0) }
 
-  it { expect(subject.call(Time.new(1984, 10, 23), adjust: :end)).to      eq Time.new(1984, 10, 23).end_of_day }
-  it { expect(subject.call(Time.new(1984, 10, 23, 1), adjust: :begin)).to eq Time.new(1984, 10, 23).beginning_of_day }
+  it { expect(subject.call(Time.new(1984, 1, 1, 1), adjust: :begin)).to eq Time.new(1984) }
+  it { expect(subject.call(Time.new(1984), adjust: :end)).to eq Time.new(1984).end_of_day }
+
+  it { expect(subject.call(DateTime.new(1984, 1, 1, 1), adjust: :begin)).to eq DateTime.new(1984) }
+  it { expect(subject.call(DateTime.new(1984), adjust: :end)).to eq DateTime.new(1984).end_of_day }
+
+  it do
+    result = subject.call(Date.new(1984, 10, 23), adjust: :end)
+
+    expect(result.year).to  eq 1984
+    expect(result.month).to eq 10
+    expect(result.day).to   eq 23
+  end
+
+  it do
+    result = subject.call(Date.new(1984), adjust: :end)
+
+    expect(result.year).to  eq 1984
+    expect(result.month).to eq 1
+    expect(result.day).to   eq 1
+  end
 
   it 'accepts time zone' do
     time = subject.call('1984-10-23', time_zone: 'Tokelau Is.').utc

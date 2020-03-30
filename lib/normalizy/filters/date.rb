@@ -13,7 +13,7 @@ module Normalizy
             end
           end
 
-          if input.is_a?(Time) || input.is_a?(DateTime)
+          if [::Date, DateTime, Time].include?(input.class)
             input = input.beginning_of_day if options[:adjust] == :begin
             input = input.end_of_day       if options[:adjust] == :end
           end
