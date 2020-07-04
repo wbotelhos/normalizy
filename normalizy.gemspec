@@ -1,23 +1,18 @@
 # frozen_string_literal: true
 
-lib = File.expand_path('lib', __dir__)
-
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-
-require 'normalizy/version'
+require_relative 'lib/normalizy/version'
 
 Gem::Specification.new do |spec|
-  spec.author      = 'Washington Botelho'
-  spec.description = 'Attribute normalizer for ActiveRecord.'
-  spec.email       = 'wbotelhos@gmail.com'
-  spec.files       = Dir['lib/**/*'] + %w[CHANGELOG.md LICENSE README.md]
-  spec.homepage    = 'https://github.com/wbotelhos/normalizy'
-  spec.license     = 'MIT'
-  spec.name        = 'normalizy'
-  spec.platform    = Gem::Platform::RUBY
-  spec.summary     = 'Attribute normalizer for ActiveRecord.'
-  spec.test_files  = Dir['spec/**/*']
-  spec.version     = Normalizy::VERSION
+  spec.author           = 'Washington Botelho'
+  spec.description      = 'Attribute normalizer for ActiveRecord.'
+  spec.email            = 'wbotelhos@gmail.com'
+  spec.extra_rdoc_files = Dir['CHANGELOG.md', 'LICENSE', 'README.md']
+  spec.files            = `git ls-files lib`.split("\n")
+  spec.homepage         = 'https://github.com/wbotelhos/normalizy'
+  spec.license          = 'MIT'
+  spec.name             = 'normalizy'
+  spec.summary          = 'Attribute normalizer for ActiveRecord.'
+  spec.version          = Normalizy::VERSION
 
   spec.add_dependency 'activerecord', '>= 4.1'
 
