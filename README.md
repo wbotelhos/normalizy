@@ -192,7 +192,7 @@ If you do not want pass it as options, Normalizy will fetch your I18n config:
 en:
   currency:
     format:
-      separator: 2
+      precision: 2
 ```
 
 And if it does not exists, `2` will be used as default.
@@ -449,7 +449,7 @@ Now, all normalization will include `squish`, even when no rule is declared.
 
 ```ruby
 normalizy :name
-'  Washington  Botelho  '
+"  Washington  \n  Botelho  "
 # 'Washington Botelho'
 ```
 
