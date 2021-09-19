@@ -4,7 +4,7 @@
 [![Gem Version](https://badge.fury.io/rb/normalizy.svg)](https://badge.fury.io/rb/normalizy)
 [![Patreon](https://img.shields.io/badge/donate-%3C3-brightgreen.svg)](https://www.patreon.com/wbotelhos)
 
-Attribute normalizer for ActiveRecord.
+Attribute normalizer for Rails.
 
 ## Description
 

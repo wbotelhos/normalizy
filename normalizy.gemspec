@@ -4,14 +4,14 @@ require_relative 'lib/normalizy/version'
 
 Gem::Specification.new do |spec|
   spec.author           = 'Washington Botelho'
-  spec.description      = 'Attribute normalizer for ActiveRecord.'
+  spec.description      = 'Attribute normalizer for Rails.'
   spec.email            = 'wbotelhos@gmail.com'
   spec.extra_rdoc_files = Dir['CHANGELOG.md', 'LICENSE', 'README.md']
   spec.files            = `git ls-files lib`.split("\n")
   spec.homepage         = 'https://github.com/wbotelhos/normalizy'
   spec.license          = 'MIT'
   spec.name             = 'normalizy'
-  spec.summary          = 'Attribute normalizer for ActiveRecord.'
+  spec.summary          = 'Attribute normalizer for Rails.'
   spec.version          = Normalizy::VERSION
 
   spec.add_dependency 'activerecord', '>= 4.1'
