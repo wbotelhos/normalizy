@@ -1,8 +1,10 @@
 # Normalizy
 
-[![Build Status](https://travis-ci.org/wbotelhos/normalizy.svg)](https://travis-ci.org/wbotelhos/normalizy)
+[![CI](https://github.com/wbotelhos/normalizy/workflows/CI/badge.svg)](https://github.com/wbotelhos/normalizy/actions)
 [![Gem Version](https://badge.fury.io/rb/normalizy.svg)](https://badge.fury.io/rb/normalizy)
-[![Patreon](https://img.shields.io/badge/donate-%3C3-brightgreen.svg)](https://www.patreon.com/wbotelhos)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f312587b4f126bb13e85/maintainability)](https://codeclimate.com/github/wbotelhos/normalizy/maintainability)
+[![Coverage](https://codecov.io/gh/wbotelhos/normalizy/branch/main/graph/badge.svg)](https://codecov.io/gh/wbotelhos/normalizy)
+[![Sponsor](https://img.shields.io/badge/sponsor-%3C3-green)](https://www.patreon.com/wbotelhos)
 
 Attribute normalizer for Rails.
 
