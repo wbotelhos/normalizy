@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::RSpec::Matcher, '.from' do
   it 'caches the value' do
     matcher = described_class.new(:downcase_field)

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::RSpec::Matcher, '.failure_message' do
   let!(:model) { Match }
 

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe ModelPercent, 'filters:percent' do
   it do
     expect(described_class.create(text: '42.00 %').text).to eq '42.00'

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe ModelSlug, 'filters:slug' do
   from = 'The Títle'
   to   = 'the-title'

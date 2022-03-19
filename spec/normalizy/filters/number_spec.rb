@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::Filters::Number do
   context 'with no cast' do
     it { expect(subject.call('abcdefghijklmnopkrstuvxyz')).to eq nil }

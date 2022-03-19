@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::Filters::Percent do
   describe 'default options' do
     it { expect(subject.call('')).to eq nil }

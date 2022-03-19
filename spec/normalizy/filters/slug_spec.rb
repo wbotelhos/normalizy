@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::Filters::Slug do
   describe 'default options' do
     it { expect(subject.call(nil)).to eq nil }

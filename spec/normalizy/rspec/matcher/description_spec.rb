@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::RSpec::Matcher, '.description' do
   let!(:matcher) { described_class.new :name }
 

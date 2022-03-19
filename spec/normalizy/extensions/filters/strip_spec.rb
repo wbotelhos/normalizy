@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe ModelStrip, 'filters:strip' do
   it do
     expect(described_class.create(strip: '  Botelho  ').strip).to eq 'Botelho'

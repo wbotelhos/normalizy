@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::Config, 'default_filters' do
   context 'when get' do
     it 'returns the default filters' do

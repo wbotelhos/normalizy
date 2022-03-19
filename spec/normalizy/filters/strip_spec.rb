@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::Filters::Strip do
   it { expect(subject.call('  Some  Text  ')).to               eq 'Some  Text' }
   it { expect(subject.call('  Some  Text  ', side: :left)).to  eq 'Some  Text  ' }

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::Config, '#alias' do
   it 'accepts alias' do
     Normalizy.configure do |config|

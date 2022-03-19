@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy, '#configure' do
   it 'yields the default config' do
     described_class.configure do |conf|

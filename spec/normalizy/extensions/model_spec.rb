@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe '#apply_normalizy' do
   context 'when object has no normalizy' do
     it do

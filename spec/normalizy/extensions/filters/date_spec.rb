@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe ModelDate, 'filters:date' do
   it { expect(described_class.create(date: '1984-10-23').date).to eq(Time.new(1984, 10, 23, 0, 0, 0, 0)) }
   it { expect(described_class.create(date_format: '84/10/23').date_format).to eq(Time.new(1984, 10, 23, 0, 0, 0, 0)) }
