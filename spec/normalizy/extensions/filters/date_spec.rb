@@ -14,7 +14,7 @@ RSpec.describe ModelDate, 'filters:date' do
   end
 
   it 'normalizys end date' do
-    expect(described_class.new(date_time_end: Date.new(1984)).date_time_end).to eq(Time.new(1984).end_of_day)
+    expect(described_class.new(date_time_end: Date.new(1984)).date_time_end.to_s).to eq(Time.new(1984).end_of_day.to_s)
   end
 
   it 'normalizys begin date' do
