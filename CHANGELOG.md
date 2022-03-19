@@ -1,60 +1,85 @@
+## v1.6.0
+
+### Fixes
+
+- Fix Money Filter to use the correct default Rails path for Currency and Percentage;
+
+### Updates
+
+- Adds Code Quality;
+- Adds Test Coverage;
+- Migrates the build to Github Actions;
+- Removes Git dependency for build;
+
 ## v1.5.0
 
-- Features:
-  - Filter `date` now supports call object that respond to `beginning_of_day` or `end_of_day`;
+### Features
+
+- Filter `date` now supports call object that respond to `beginning_of_day` or `end_of_day`;
 
 ## v1.4.0
 
-- Features:
-  - Adds `date` support for `Date` class.
+### Features
+
+- Adds `date` support for `Date` class.
 
 ## v1.3.0
 
-- Changes:
- - Support Rails 6.
+### Updates
+
+- Support Rails 6.
 
 ## v1.2.0
 
-- Features:
-  - `money` filter now allows negative numbers.
+### Features
+
+- `money` filter now allows negative numbers.
 
 ## v1.1.1
 
-- Fixes:
-  - When use `slug` filter the original values was not saved.
+### Fixes
+
+- When use `slug` filter the original values was not saved.
 
 ## v1.1.0
 
-- Features:
-  - Added `slug` filter with option to apply the value on other field.
+### Features
+
+- Added `slug` filter with option to apply the value on other field.
 
 ## v1.0.1
 
-- Fixes:
-  - When `type` options was `cents` and had no decimal on number, extra decimal were added.
+### Fixes
+
+- When `type` options was `cents` and had no decimal on number, extra decimal were added.
 
 ## v1.0.0
 
-- Changes:
-  - `raw` options was dropped since `prepend` already works before type cast;
-  - Multiple lines of `normalizy` will be evaluated from the bottom to top.
+### Updates
 
-- Features:
-  - `alias` configuration now accepts options;
+- `raw` options was dropped since `prepend` already works before type cast;
+- Multiple lines of `normalizy` will be evaluated from the bottom to top.
 
-- Fixes:
-  - Multiple filters were not running together.
+### Features
+
+- `alias` configuration now accepts options;
+
+### Fixes
+
+- Multiple filters were not running together.
 
 ## v0.2.0
 
-- Changes:
-  - `number` filter no more make cast automatically.
-  - `number` now accept `cast` options with method to be used on cast type;
+### Updates
 
-- Features:
-  - add `date` filter with `format`, `time_zone` and I18n error message support;
-  - add `money` filter with `cast`, `type` and I18n support;
-  - add `percent` filter with `cast`, `type` and I18n support.
+- `number` filter no more make cast automatically.
+- `number` now accept `cast` options with method to be used on cast type;
+
+### Features
+
+- add `date` filter with `format`, `time_zone` and I18n error message support;
+- add `money` filter with `cast`, `type` and I18n support;
+- add `percent` filter with `cast`, `type` and I18n support.
 
 ## v0.1.0
 

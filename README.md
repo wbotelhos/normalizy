@@ -142,9 +142,10 @@ If you do not want pass it as options, Normalizy will fetch your I18n config:
 
 ```yaml
 en:
-  currency:
-    format:
-      separator: '.'
+  number:
+    currency:
+      format:
+        separator: '.'
 ```
 
 And if it does not exists, `.` will be used as default.
@@ -192,9 +193,10 @@ If you do not want pass it as options, Normalizy will fetch your I18n config:
 
 ```yaml
 en:
-  currency:
-    format:
-      precision: 2
+  number:
+    currency:
+      format:
+        precision: 2
 ```
 
 And if it does not exists, `2` will be used as default.
@@ -267,9 +269,10 @@ If you do not want pass it as options, Normalizy will fetch your I18n config:
 
 ```yaml
 en:
-  percentage:
-    format:
-      separator: '.'
+  number:
+    percentage:
+      format:
+        separator: '.'
 ```
 
 And if it does not exists, `.` will be used as default.
@@ -317,9 +320,10 @@ If you do not want pass it as options, Normalizy will fetch your I18n config:
 
 ```yaml
 en:
-  percentage:
-    format:
-      separator: 2
+  number:
+    percentage:
+      format:
+        separator: 2
 ```
 
 And if it does not exists, `2` will be used as default.
