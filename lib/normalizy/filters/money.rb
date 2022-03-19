@@ -29,7 +29,7 @@ module Normalizy
         end
 
         def precision(options)
-          options.fetch :precision, I18n.t('currency.format.precision', default: 2)
+          options.fetch(:precision, I18n.t('number.currency.format.precision', default: 2))
         end
 
         def precisioned(value, options)
@@ -37,7 +37,7 @@ module Normalizy
         end
 
         def separator(options)
-          options.fetch :separator, I18n.t('currency.format.separator', default: '.')
+          options.fetch(:separator, I18n.t('number.currency.format.separator', default: '.'))
         end
       end
     end

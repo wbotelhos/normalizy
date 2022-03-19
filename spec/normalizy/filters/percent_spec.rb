@@ -109,8 +109,8 @@ RSpec.describe Normalizy::Filters::Percent do
 
     context 'when provided I18n' do
       before do
-        allow(I18n).to receive(:t).with('percentage.format.separator', default: '.').and_return 'x'
-        allow(I18n).to receive(:t).with('percentage.format.precision', default: 2).and_return 2
+        allow(I18n).to receive(:t).with('number.percentage.format.separator', default: '.').and_return 'x'
+        allow(I18n).to receive(:t).with('number.percentage.format.precision', default: 2).and_return 2
       end
 
       it { expect(subject.call('1x2')).to eq '1.20' }
