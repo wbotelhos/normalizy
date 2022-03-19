@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.description      = 'Attribute normalizer for Rails.'
   spec.email            = 'wbotelhos@gmail.com'
   spec.extra_rdoc_files = Dir['CHANGELOG.md', 'LICENSE', 'README.md']
-  spec.files            = `git ls-files lib`.split("\n")
+  spec.files            = Dir['lib/**/*']
   spec.homepage         = 'https://github.com/wbotelhos/normalizy'
   spec.license          = 'MIT'
   spec.name             = 'normalizy'
