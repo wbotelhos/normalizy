@@ -11,8 +11,8 @@ if ENV['COVERAGE'] == 'true'
   SimpleCov.start('rails') do
     add_filter [
       '/lib/generators',
-      '/vendor',
       '/lib/normalizy/version.rb',
+      '/vendor',
     ]
   end
 end
