@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/wbotelhos/normalizy/workflows/CI/badge.svg)](https://github.com/wbotelhos/normalizy/actions)
 [![Gem Version](https://badge.fury.io/rb/normalizy.svg)](https://badge.fury.io/rb/normalizy)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f312587b4f126bb13e85/maintainability)](https://codeclimate.com/github/wbotelhos/normalizy/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3896d0a11bee012c818c/maintainability)](https://codeclimate.com/github/wbotelhos/normalizy/maintainability)
 [![Coverage](https://codecov.io/gh/wbotelhos/normalizy/branch/main/graph/badge.svg)](https://codecov.io/gh/wbotelhos/normalizy)
 [![Sponsor](https://img.shields.io/badge/sponsor-%3C3-green)](https://www.patreon.com/wbotelhos)
 
