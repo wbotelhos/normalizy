@@ -406,6 +406,17 @@ normalizy :name, with: { strip: { side: :both } }
 
 As you can see, the rules can be passed as Symbol/String or as Hash if it has options.
 
+### Truncate
+
+Remove excedent string part from a gived limit.
+
+```ruby
+normalizy :description, with: { truncate: { limit: 10 } }
+
+'Once upon a time in a world far far away'
+# 'Once upon '
+```
+
 ## Multiple Filters
 
 You can normalize with a couple of filters at once:
