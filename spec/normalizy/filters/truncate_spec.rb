@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Normalizy::Filters::Truncate do
   context 'when :limit options is not given' do
     it { expect(subject.call('miss')).to eq 'miss' }
