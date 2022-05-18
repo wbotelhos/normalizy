@@ -5,7 +5,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'support/coverage'
 
 require 'normalizy'
-require 'pry-byebug'
+require 'debug'
 
 require 'support/db/schema'
 require 'support/filters/blacklist'
