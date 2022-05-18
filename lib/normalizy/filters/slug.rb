@@ -4,7 +4,7 @@ module Normalizy
   module Filters
     module Slug
       class << self
-        def call(input, options = {})
+        def call(input, _options = {})
           return input unless input.is_a?(String)
 
           input.parameterize

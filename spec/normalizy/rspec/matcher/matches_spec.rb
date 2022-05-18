@@ -17,7 +17,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
 
       matcher.with :missing
 
-      expect(matcher.matches?(object)).to eq false
+      expect(matcher.matches?(object)).to be(false)
     end
 
     it do
@@ -25,7 +25,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
 
       matcher.with :downcase
 
-      expect(matcher.matches?(object)).to eq true
+      expect(matcher.matches?(object)).to be(true)
     end
 
     it do
@@ -33,7 +33,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
 
       matcher.with trim: { side: :left }
 
-      expect(matcher.matches?(object)).to eq true
+      expect(matcher.matches?(object)).to be(true)
     end
 
     it do
@@ -41,7 +41,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
 
       matcher.with trim: { side: :left }
 
-      expect(matcher.matches?(object)).to eq true
+      expect(matcher.matches?(object)).to be(true)
     end
 
     it do
@@ -53,7 +53,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
 
       matcher.with :squish
 
-      expect(matcher.matches?(object)).to eq true
+      expect(matcher.matches?(object)).to be(true)
     end
 
     it do
@@ -65,7 +65,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
 
       matcher.with :squish
 
-      expect(matcher.matches?(object)).to eq true
+      expect(matcher.matches?(object)).to be(true)
     end
 
     it do
@@ -77,7 +77,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
 
       matcher.with(strip: { side: :left })
 
-      expect(matcher.matches?(object)).to eq true
+      expect(matcher.matches?(object)).to be(true)
     end
 
     it do
@@ -89,7 +89,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
 
       matcher.with :squish
 
-      expect(matcher.matches?(object)).to eq false
+      expect(matcher.matches?(object)).to be(false)
     end
   end
 
@@ -100,7 +100,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
       matcher.from '1'
       matcher.to   '2'
 
-      expect(matcher.matches?(object)).to eq false
+      expect(matcher.matches?(object)).to be(false)
     end
 
     it do
@@ -109,7 +109,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
       matcher.from 'BOTELHO'
       matcher.to   'botelho'
 
-      expect(matcher.matches?(object)).to eq true
+      expect(matcher.matches?(object)).to be(true)
     end
   end
 end

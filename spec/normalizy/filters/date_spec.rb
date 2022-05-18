@@ -47,14 +47,15 @@ RSpec.describe Normalizy::Filters::Date do
         allow(I18n).to receive(:t).with(:date,
           scope:   ['normalizy.errors.date', 'model_date'],
           value:   '1984-10-00',
-          default: '%{value} is an invalid date.').and_return 'date.error'
+          default: '%{value} is an invalid date.'
+        ).and_return 'date.error'
       end
 
       it 'writes an error on object and does not set the values' do
         subject.call '1984-10-00', options
 
         expect(object.errors[:date]).to eq ['date.error']
-        expect(object.date).to          eq nil
+        expect(object.date).to          be(nil)
       end
     end
 
@@ -63,7 +64,7 @@ RSpec.describe Normalizy::Filters::Date do
         subject.call '1984-10-00', options
 
         expect(object.errors[:date]).to eq ['1984-10-00 is an invalid date.']
-        expect(object.date).to          eq nil
+        expect(object.date).to          be(nil)
       end
     end
   end

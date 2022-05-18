@@ -68,8 +68,8 @@ RSpec.describe '#apply_normalizy' do
         {
           key:       :value,
           attribute: :method_with_options_field,
-          object:    Model.new
-        }
+          object:    Model.new,
+        },
       ].join ', '
     end
 

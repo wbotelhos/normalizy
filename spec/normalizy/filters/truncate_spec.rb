@@ -6,7 +6,7 @@ RSpec.describe Normalizy::Filters::Truncate do
   end
 
   context 'when :limit options is not a number' do
-    it { expect(subject.call('miss', limit: "wrong")).to eq 'miss' }
+    it { expect(subject.call('miss', limit: 'wrong')).to eq 'miss' }
   end
 
   context 'when input value is not a string' do

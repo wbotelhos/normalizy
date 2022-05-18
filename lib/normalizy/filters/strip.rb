@@ -9,7 +9,7 @@ module Normalizy
         regex = {
           both:  '\A\s*|\s*\z',
           left:  '\A\s*',
-          right: '\s*\z'
+          right: '\s*\z',
         }[options[:side] || :both]
 
         input.gsub Regexp.new(/#{regex}/), ''

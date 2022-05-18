@@ -43,7 +43,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
           { block: nil, options: {}, rules: [:upcase, { trim: { side: :left } }] },
           { block: nil, options: {}, rules: :squish },
           { block: nil, options: {}, rules: [:upcase, { trim: { side: :right } }] },
-          { block: nil, options: {}, rules: :squish }
+          { block: nil, options: {}, rules: :squish },
         ]
       )
     end
@@ -86,13 +86,13 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
           { block: nil, options: {}, rules: [:upcase, { trim: { side: :left } }] },
           { block: nil, options: {}, rules: :squish },
           { block: nil, options: {}, rules: [:upcase, { trim: { side: :right } }] },
-          { block: nil, options: {}, rules: :squish }
+          { block: nil, options: {}, rules: :squish },
         ],
         name:  [
           { block: nil, options: {}, rules: [:upcase, { trim: { side: :left } }] },
           { block: nil, options: {}, rules: :squish },
           { block: nil, options: {}, rules: [:upcase, { trim: { side: :right } }] },
-          { block: nil, options: {}, rules: :squish }
+          { block: nil, options: {}, rules: :squish },
         ]
       )
     end
@@ -132,7 +132,7 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
         name: [
           { block: nil, options: {}, rules: :upcase },
           { block: nil, options: {}, rules: :squish },
-          { block: nil, options: {}, rules: :upcase }
+          { block: nil, options: {}, rules: :upcase },
         ]
       )
     end
@@ -173,12 +173,12 @@ RSpec.describe Normalizy::Extension, ':normalizy_rules' do
         email: [
           { block: nil, options: {}, rules: :upcase },
           { block: nil, options: {}, rules: :squish },
-          { block: nil, options: {}, rules: :upcase }
+          { block: nil, options: {}, rules: :upcase },
         ],
         name:  [
           { block: nil, options: {}, rules: :upcase },
           { block: nil, options: {}, rules: :squish },
-          { block: nil, options: {}, rules: :upcase }
+          { block: nil, options: {}, rules: :upcase },
         ]
       )
     end

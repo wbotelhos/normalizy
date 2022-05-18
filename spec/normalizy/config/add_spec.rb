@@ -14,7 +14,7 @@ RSpec.describe Normalizy::Config, '#add' do
       percent:   Normalizy::Filters::Percent,
       slug:      Normalizy::Filters::Slug,
       strip:     Normalizy::Filters::Strip,
-      truncate:  Normalizy::Filters::Truncate,
+      truncate:  Normalizy::Filters::Truncate
     )
   end
 end

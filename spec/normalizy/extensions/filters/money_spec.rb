@@ -16,21 +16,21 @@ RSpec.describe ModelMoney, 'filters:money' do
 
   it do
     expect(described_class.create(cast_to_i: '$ 42.00').cast_to_i).to  be 42
-    expect(described_class.create(cast_to_i: '$ -42.00').cast_to_i).to be -42
+    expect(described_class.create(cast_to_i: '$ -42.00').cast_to_i).to be(-42)
   end
 
   it do
     expect(described_class.create(cast_to_d: '$ 1.23').cast_to_d).to  eq 1.23
-    expect(described_class.create(cast_to_d: '$ -1.23').cast_to_d).to eq -1.23
+    expect(described_class.create(cast_to_d: '$ -1.23').cast_to_d).to eq(-1.23)
   end
 
   it do
     expect(described_class.create(cents_type_and_cast_to_f: '$ 42.00').cents_type_and_cast_to_f).to  eq 4200.0
-    expect(described_class.create(cents_type_and_cast_to_f: '$ -42.00').cents_type_and_cast_to_f).to eq -4200.0
+    expect(described_class.create(cents_type_and_cast_to_f: '$ -42.00').cents_type_and_cast_to_f).to eq(-4200.0)
   end
 
   it do
     expect(described_class.create(cents_type_and_cast_to_i: '$ 42.00').cents_type_and_cast_to_i).to  eq 4200
-    expect(described_class.create(cents_type_and_cast_to_i: '$ -42.00').cents_type_and_cast_to_i).to eq -4200
+    expect(described_class.create(cents_type_and_cast_to_i: '$ -42.00').cents_type_and_cast_to_i).to eq(-4200)
   end
 end
