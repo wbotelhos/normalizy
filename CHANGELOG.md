@@ -1,3 +1,13 @@
+## v1.7.0
+
+### Features
+
+- Adds `truncate` filter; [#3](https://github.com/wbotelhos/normalizy/pull/3) by [rafaeldev](https://github.com/rafaeldev)
+
+### Updates
+
+- Adds RuboCop task on the CI;
+
 ## v1.6.0
 
 ### Fixes
@@ -9,13 +19,13 @@
 - Adds Code Quality;
 - Adds Test Coverage;
 - Migrates the build to Github Actions;
-- Removes Git dependency for build;
+- Removes Git dependency for the build;
 
 ## v1.5.0
 
 ### Features
 
-- Filter `date` now supports call object that respond to `beginning_of_day` or `end_of_day`;
+- Filter `date` now supports call object that responds to `beginning_of_day` or `end_of_day`;
 
 ## v1.4.0
 
@@ -39,19 +49,19 @@
 
 ### Fixes
 
-- When use `slug` filter the original values was not saved.
+- When using `slug` filter the original values were not saved.
 
 ## v1.1.0
 
 ### Features
 
-- Added `slug` filter with option to apply the value on other field.
+- Added `slug` filter with the option to apply the value on other fields.
 
 ## v1.0.1
 
 ### Fixes
 
-- When `type` options was `cents` and had no decimal on number, extra decimal were added.
+- When `type` options were `cents` and had no decimal on the number, extra decimals were added.
 
 ## v1.0.0
 
@@ -73,7 +83,7 @@
 ### Updates
 
 - `number` filter no more make cast automatically.
-- `number` now accept `cast` options with method to be used on cast type;
+- `number` now accept `cast` options with a method to be used on cast type;
 
 ### Features
 
