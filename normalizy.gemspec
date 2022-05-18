@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.files            = Dir['lib/**/*']
   spec.homepage         = 'https://github.com/wbotelhos/normalizy'
   spec.license          = 'MIT'
+  spec.metadata         = { 'rubygems_mfa_required' => 'true' }
   spec.name             = 'normalizy'
   spec.summary          = 'Attribute normalizer for Rails.'
   spec.version          = Normalizy::VERSION
