@@ -8,7 +8,7 @@ module Normalizy
 
         value = input.gsub(/\D/, '')
 
-        return nil                        if value.blank?
+        return nil if value.blank?
         return value.send(options[:cast]) if options[:cast]
 
         value

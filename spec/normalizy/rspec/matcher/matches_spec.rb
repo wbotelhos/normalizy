@@ -98,7 +98,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
       matcher = described_class.new(:alone)
 
       matcher.from '1'
-      matcher.to   '2'
+      matcher.to '2'
 
       expect(matcher.matches?(object)).to be(false)
     end
@@ -107,7 +107,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.matches?' do
       matcher = described_class.new(:downcase_field)
 
       matcher.from 'BOTELHO'
-      matcher.to   'botelho'
+      matcher.to 'botelho'
 
       expect(matcher.matches?(object)).to be(true)
     end

@@ -20,7 +20,7 @@ module Normalizy
     end
 
     def initialize
-      @default_filters   = {}
+      @default_filters = {}
       @normalizy_aliases = {}
 
       @filters = {

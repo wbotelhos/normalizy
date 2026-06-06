@@ -85,7 +85,7 @@ RSpec.describe '#apply_normalizy' do
   context 'when assign is made via set' do
     context 'with no save' do
       it do
-        object        = Model.new
+        object = Model.new
         object.symbol = '  Bote  lho  '
 
         expect(object.symbol).to eq 'Bote lho'
@@ -94,7 +94,7 @@ RSpec.describe '#apply_normalizy' do
 
     context 'with save' do
       it do
-        object        = Model.new
+        object = Model.new
         object.symbol = '  Bote  lho  '
         object.save
 

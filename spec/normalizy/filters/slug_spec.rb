@@ -3,7 +3,7 @@
 RSpec.describe Normalizy::Filters::Slug do
   describe 'default options' do
     it { expect(subject.call(nil)).to be(nil) }
-    it { expect(subject.call('')).to  eq '' }
+    it { expect(subject.call('')).to eq '' }
 
     it { expect(subject.call('The Title')).to eq 'the-title' }
   end

@@ -6,7 +6,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.description' do
   context 'with no :with expectation' do
     it do
       matcher.from :from
-      matcher.to   :to
+      matcher.to :to
 
       expect(matcher.description).to eq 'normalizy name from "from" to "to"'
     end
@@ -17,7 +17,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.description' do
       matcher.with :blank
 
       matcher.from :from
-      matcher.to   :to
+      matcher.to :to
 
       expect(matcher.description).to eq 'normalizy name with blank'
     end

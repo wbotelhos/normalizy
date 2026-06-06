@@ -5,4 +5,4 @@ module Normalizy
   end
 end
 
-Dir["#{File.dirname(__FILE__)}/filters/*.rb"].sort.each { |file| require file }
+Dir["#{File.dirname(__FILE__)}/filters/*.rb"].each { |file| require file }

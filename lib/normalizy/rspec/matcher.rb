@@ -105,7 +105,7 @@ module Normalizy
       def with_value
         options = @subject.class.normalizy_rules[@attribute]
 
-        return :nil            if options.nil?
+        return :nil if options.nil?
         return %("#{options}") if options.blank?
 
         result = options.map do |option|

@@ -8,11 +8,11 @@ module Normalizy
       private
 
       def extract_filter(rule, rule_options, attribute, filters: Normalizy.config.filters)
-        options = rule_options.merge(attribute: attribute, object: self)
+        options = rule_options.merge(attribute:, object: self)
 
         return [filters[rule] || rule, options] unless rule.is_a?(Hash)
 
-        filter  = filters[rule.keys.first] || rule
+        filter = filters[rule.keys.first] || rule
         options = (rule.values.first || {}).merge(options)
 
         [filter, options]
@@ -58,7 +58,7 @@ module Normalizy
 
           unalias_for(rule_name).each do |unaliased_rule|
             filter, filter_options = extract_filter(unaliased_rule, rule_options, attribute)
-            result                 = extract_value(result, filter, filter_options, block)
+            result = extract_value(result, filter, filter_options, block)
           end
         end
 
@@ -75,36 +75,38 @@ module Normalizy
 
       def normalizy(*args, &block)
         options = args.extract_options!
-        rules   = options[:with]
+        rules = options[:with]
 
         self.normalizy_rules ||= {}
 
         args.each do |field|
           normalizy_rules[field] ||= []
-          normalizy_rules[field] << { block: block, options: options.except(:with), rules: rules }
+          normalizy_rules[field] << { block:, options: options.except(:with), rules: }
         end
 
-        prepend Module.new {
-          args.each do |attribute|
-            define_method :"#{attribute}=" do |value|
-              result = normalizy!(
-                attribute: attribute,
-                block:     block,
-                options:   options.except(:with),
-                rules:     rules,
-                value:     value
-              )
+        prepend(
+          Module.new do
+            args.each do |attribute|
+              define_method :"#{attribute}=" do |value|
+                result = normalizy!(
+                  attribute:,
+                  block:,
+                  options:   options.except(:with),
+                  rules:,
+                  value:
+                )
 
-              if rules.is_a?(Hash) && rules.dig(:slug, :to).present?
-                write_attribute rules.dig(:slug, :to), result
+                if rules.is_a?(Hash) && rules.dig(:slug, :to).present?
+                  write_attribute rules.dig(:slug, :to), result
 
-                super value
-              else
-                super result
+                  super(value)
+                else
+                  super(result)
+                end
               end
             end
           end
-        }
+        )
       end
     end
   end
