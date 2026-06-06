@@ -98,6 +98,14 @@ module Normalizy
         @to.nil? ? :nil : %("#{@to}")
       end
 
+      def format_hash(hash)
+        pairs = hash.map do |k, v|
+          "#{k}: #{v.is_a?(Hash) ? format_hash(v) : v.inspect}"
+        end
+
+        "{#{pairs.join(', ')}}"
+      end
+
       def with_expected
         @with
       end
@@ -113,7 +121,7 @@ module Normalizy
 
           return :nil if rules.nil?
 
-          rules.presence || %("#{rules}")
+          rules.is_a?(Hash) ? format_hash(rules) : rules.presence || %("#{rules}")
         end
 
         result.join ', '
