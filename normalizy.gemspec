@@ -16,12 +16,4 @@ Gem::Specification.new do |spec|
   spec.version          = Normalizy::VERSION
 
   spec.add_dependency 'activerecord', '>= 4.1'
-
-  spec.add_development_dependency 'codecov'
-  spec.add_development_dependency 'debug'
-  spec.add_development_dependency 'rspec-rails'
-  spec.add_development_dependency 'rubocop-performance'
-  spec.add_development_dependency 'rubocop-rails'
-  spec.add_development_dependency 'rubocop-rspec'
-  spec.add_development_dependency 'sqlite3'
 end
