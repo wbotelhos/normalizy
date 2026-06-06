@@ -1,3 +1,13 @@
+## v2.0.0
+
+### Break Changes
+
+- Drops support for Ruby < 3.3;
+
+### Fixes
+
+- `date` filter now returns `nil` explicitly on invalid date to avoid Rails 8 compatibility issue where `errors.add` returns the added `ActiveModel::Error` object instead of `nil`;
+
 ## v1.7.0
 
 ### Features

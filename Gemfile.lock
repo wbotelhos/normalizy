@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    normalizy (1.7.0)
+    normalizy (2.0.0)
       activerecord (>= 4.1)
 
 GEM
