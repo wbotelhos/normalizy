@@ -19,17 +19,17 @@ RSpec.describe Normalizy::Filters::Date do
   it do
     result = subject.call(Date.new(1984, 10, 23), adjust: :end)
 
-    expect(result.year).to  eq 1984
+    expect(result.year).to eq 1984
     expect(result.month).to eq 10
-    expect(result.day).to   eq 23
+    expect(result.day).to eq 23
   end
 
   it do
     result = subject.call(Date.new(1984), adjust: :end)
 
-    expect(result.year).to  eq 1984
+    expect(result.year).to eq 1984
     expect(result.month).to eq 1
-    expect(result.day).to   eq 1
+    expect(result.day).to eq 1
   end
 
   it 'accepts time zone' do
@@ -39,8 +39,8 @@ RSpec.describe Normalizy::Filters::Date do
   end
 
   context 'with invalid date' do
-    let!(:object)  { ModelDate.new }
-    let!(:options) { { attribute: :date, object: object } }
+    let!(:object) { ModelDate.new }
+    let!(:options) { { attribute: :date, object: } }
 
     context 'with i18n present' do
       before do
@@ -55,7 +55,7 @@ RSpec.describe Normalizy::Filters::Date do
         subject.call '1984-10-00', options
 
         expect(object.errors[:date]).to eq ['date.error']
-        expect(object.date).to          be(nil)
+        expect(object.date).to be(nil)
       end
     end
 
@@ -64,7 +64,7 @@ RSpec.describe Normalizy::Filters::Date do
         subject.call '1984-10-00', options
 
         expect(object.errors[:date]).to eq ['1984-10-00 is an invalid date.']
-        expect(object.date).to          be(nil)
+        expect(object.date).to be(nil)
       end
     end
   end

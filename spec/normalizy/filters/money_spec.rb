@@ -4,46 +4,46 @@ RSpec.describe Normalizy::Filters::Money do
   describe 'default options' do
     it { expect(subject.call('')).to be(nil) }
 
-    it { expect(subject.call(1)).to         be 1 }
-    it { expect(subject.call(1.70)).to      be 1.70 }
-    it { expect(subject.call(103.70)).to    be 103.70 }
-    it { expect(subject.call(1030.70)).to   be 1030.70 }
+    it { expect(subject.call(1)).to be 1 }
+    it { expect(subject.call(1.70)).to be 1.70 }
+    it { expect(subject.call(103.70)).to be 103.70 }
+    it { expect(subject.call(1030.70)).to be 1030.70 }
     it { expect(subject.call(10_300.70)).to be 10_300.70 }
 
-    it { expect(subject.call(-1)).to         be(-1) }
-    it { expect(subject.call(-1.70)).to      be(-1.70) }
-    it { expect(subject.call(-103.70)).to    be(-103.70) }
-    it { expect(subject.call(-1030.70)).to   be(-1030.70) }
+    it { expect(subject.call(-1)).to be(-1) }
+    it { expect(subject.call(-1.70)).to be(-1.70) }
+    it { expect(subject.call(-103.70)).to be(-103.70) }
+    it { expect(subject.call(-1030.70)).to be(-1030.70) }
     it { expect(subject.call(-10_300.70)).to be(-10_300.70) }
 
-    it { expect(subject.call('0')).to        eq '0.00' }
-    it { expect(subject.call('100')).to      eq '100.00' }
-    it { expect(subject.call('100.0')).to    eq '100.00' }
-    it { expect(subject.call('1.70')).to     eq '1.70' }
-    it { expect(subject.call('103.70')).to   eq '103.70' }
-    it { expect(subject.call('1030.70')).to  eq '1030.70' }
+    it { expect(subject.call('0')).to eq '0.00' }
+    it { expect(subject.call('100')).to eq '100.00' }
+    it { expect(subject.call('100.0')).to eq '100.00' }
+    it { expect(subject.call('1.70')).to eq '1.70' }
+    it { expect(subject.call('103.70')).to eq '103.70' }
+    it { expect(subject.call('1030.70')).to eq '1030.70' }
     it { expect(subject.call('10300.70')).to eq '10300.70' }
 
-    it { expect(subject.call('-0')).to        eq '-0.00' }
-    it { expect(subject.call('-100')).to      eq '-100.00' }
-    it { expect(subject.call('-100.0')).to    eq '-100.00' }
-    it { expect(subject.call('-1.70')).to     eq '-1.70' }
-    it { expect(subject.call('-103.70')).to   eq '-103.70' }
-    it { expect(subject.call('-1030.70')).to  eq '-1030.70' }
+    it { expect(subject.call('-0')).to eq '-0.00' }
+    it { expect(subject.call('-100')).to eq '-100.00' }
+    it { expect(subject.call('-100.0')).to eq '-100.00' }
+    it { expect(subject.call('-1.70')).to eq '-1.70' }
+    it { expect(subject.call('-103.70')).to eq '-103.70' }
+    it { expect(subject.call('-1030.70')).to eq '-1030.70' }
     it { expect(subject.call('-10300.70')).to eq '-10300.70' }
 
-    it { expect(subject.call('$ 0.01')).to     eq '0.01' }
-    it { expect(subject.call('$ 1')).to        eq '1.00' }
-    it { expect(subject.call('$ 1.70')).to     eq '1.70' }
-    it { expect(subject.call('$ 103.70')).to   eq '103.70' }
-    it { expect(subject.call('$ 1030.70')).to  eq '1030.70' }
+    it { expect(subject.call('$ 0.01')).to eq '0.01' }
+    it { expect(subject.call('$ 1')).to eq '1.00' }
+    it { expect(subject.call('$ 1.70')).to eq '1.70' }
+    it { expect(subject.call('$ 103.70')).to eq '103.70' }
+    it { expect(subject.call('$ 1030.70')).to eq '1030.70' }
     it { expect(subject.call('$ 10300.70')).to eq '10300.70' }
 
-    it { expect(subject.call('$ -0.01')).to     eq '-0.01' }
-    it { expect(subject.call('$ -1')).to        eq '-1.00' }
-    it { expect(subject.call('$ -1.70')).to     eq '-1.70' }
-    it { expect(subject.call('$ -103.70')).to   eq '-103.70' }
-    it { expect(subject.call('$ -1030.70')).to  eq '-1030.70' }
+    it { expect(subject.call('$ -0.01')).to eq '-0.01' }
+    it { expect(subject.call('$ -1')).to eq '-1.00' }
+    it { expect(subject.call('$ -1.70')).to eq '-1.70' }
+    it { expect(subject.call('$ -103.70')).to eq '-103.70' }
+    it { expect(subject.call('$ -1030.70')).to eq '-1030.70' }
     it { expect(subject.call('$ -10300.70')).to eq '-10300.70' }
   end
 
@@ -63,7 +63,7 @@ RSpec.describe Normalizy::Filters::Money do
     it { expect(subject.call(-10_300.70, type: :cents)).to be(-10_300.70) }
 
     context 'with different separator' do
-      it { expect(subject.call('1,7',  separator: ',', type: :cents)).to eq '170' }
+      it { expect(subject.call('1,7', separator: ',', type: :cents)).to eq '170' }
       it { expect(subject.call('-1,7', separator: ',', type: :cents)).to eq '-170' }
     end
 
@@ -178,7 +178,7 @@ RSpec.describe Normalizy::Filters::Money do
 
   describe 'separator' do
     context 'when provided inline' do
-      it { expect(subject.call('R$ 0,01', separator: ',')).to  eq '0.01' }
+      it { expect(subject.call('R$ 0,01', separator: ',')).to eq '0.01' }
       it { expect(subject.call('R$ -0,01', separator: ',')).to eq '-0.01' }
     end
 
@@ -188,12 +188,12 @@ RSpec.describe Normalizy::Filters::Money do
         allow(I18n).to receive(:t).with('number.currency.format.precision', default: 2).and_return 2
       end
 
-      it { expect(subject.call('1x2')).to  eq '1.20' }
+      it { expect(subject.call('1x2')).to eq '1.20' }
       it { expect(subject.call('-1x2')).to eq '-1.20' }
     end
 
     context 'when not provided' do
-      it { expect(subject.call('1.2')).to  eq '1.20' }
+      it { expect(subject.call('1.2')).to eq '1.20' }
       it { expect(subject.call('-1.2')).to eq '-1.20' }
     end
   end

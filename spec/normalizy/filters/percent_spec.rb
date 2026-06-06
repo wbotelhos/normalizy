@@ -4,25 +4,25 @@ RSpec.describe Normalizy::Filters::Percent do
   describe 'default options' do
     it { expect(subject.call('')).to be(nil) }
 
-    it { expect(subject.call(1)).to        be 1 }
-    it { expect(subject.call(1.70)).to     be 1.70 }
-    it { expect(subject.call(103.70)).to   be 103.70 }
-    it { expect(subject.call(1030.70)).to  be 1030.70 }
+    it { expect(subject.call(1)).to be 1 }
+    it { expect(subject.call(1.70)).to be 1.70 }
+    it { expect(subject.call(103.70)).to be 103.70 }
+    it { expect(subject.call(1030.70)).to be 1030.70 }
     it { expect(subject.call(10_300.70)).to be 10_300.70 }
 
-    it { expect(subject.call('0')).to        eq '0.00' }
-    it { expect(subject.call('100')).to      eq '100.00' }
-    it { expect(subject.call('100.0')).to    eq '100.00' }
-    it { expect(subject.call('1.70')).to     eq '1.70' }
-    it { expect(subject.call('103.70')).to   eq '103.70' }
-    it { expect(subject.call('1030.70')).to  eq '1030.70' }
+    it { expect(subject.call('0')).to eq '0.00' }
+    it { expect(subject.call('100')).to eq '100.00' }
+    it { expect(subject.call('100.0')).to eq '100.00' }
+    it { expect(subject.call('1.70')).to eq '1.70' }
+    it { expect(subject.call('103.70')).to eq '103.70' }
+    it { expect(subject.call('1030.70')).to eq '1030.70' }
     it { expect(subject.call('10300.70')).to eq '10300.70' }
 
-    it { expect(subject.call('$ 0.01')).to     eq '0.01' }
-    it { expect(subject.call('$ 1')).to        eq '1.00' }
-    it { expect(subject.call('$ 1.70')).to     eq '1.70' }
-    it { expect(subject.call('$ 103.70')).to   eq '103.70' }
-    it { expect(subject.call('$ 1030.70')).to  eq '1030.70' }
+    it { expect(subject.call('$ 0.01')).to eq '0.01' }
+    it { expect(subject.call('$ 1')).to eq '1.00' }
+    it { expect(subject.call('$ 1.70')).to eq '1.70' }
+    it { expect(subject.call('$ 103.70')).to eq '103.70' }
+    it { expect(subject.call('$ 1030.70')).to eq '1030.70' }
     it { expect(subject.call('$ 10300.70')).to eq '10300.70' }
   end
 

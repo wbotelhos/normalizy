@@ -43,11 +43,11 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table :model_moneys do |t|
-    t.string  :text
-    t.string  :cents_type
+    t.string :text
+    t.string :cents_type
     t.integer :cast_to_i
     t.decimal :cast_to_d
-    t.float   :cents_type_and_cast_to_f
+    t.float :cents_type_and_cast_to_f
     t.integer :cents_type_and_cast_to_i
   end
 
@@ -56,11 +56,11 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table :model_percents do |t|
-    t.string  :text
-    t.string  :cents_type
+    t.string :text
+    t.string :cents_type
     t.integer :cast_to_i
     t.decimal :cast_to_d
-    t.float   :cents_type_and_cast_to_f
+    t.float :cents_type_and_cast_to_f
     t.integer :cents_type_and_cast_to_i
   end
 
