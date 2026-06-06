@@ -58,7 +58,7 @@ module Normalizy
         else
           @subject.send :"#{@attribute}=", @from
 
-          @subject[@attribute] == @to
+          @subject.send(@attribute) == @to
         end
       end
 
