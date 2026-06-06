@@ -40,7 +40,7 @@ RSpec.describe Normalizy::RSpec::Matcher, '.failure_message' do
       matcher.with :missing
       matcher.matches? model.new
 
-      expect(matcher.failure_message).to eq %(expected: missing\n     got: {:trim=>{:side=>:left}})
+      expect(matcher.failure_message).to eq %(expected: missing\n     got: {trim: {side: :left}})
     end
   end
 end
