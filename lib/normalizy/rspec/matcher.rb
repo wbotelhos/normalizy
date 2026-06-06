@@ -43,7 +43,7 @@ module Normalizy
 
           return false if options.blank?
 
-          options = default_rules if options.map { |option| option[:rules] }.compact.blank?
+          options = default_rules if options.filter_map { |option| option[:rules] }.blank?
 
           return false if options.blank?
 
