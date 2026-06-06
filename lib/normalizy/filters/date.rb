@@ -18,7 +18,9 @@ module Normalizy
 
           input
         rescue ArgumentError
-          options[:object].errors.add options[:attribute], error_message(input, options)
+          options[:object].errors.add(options[:attribute], error_message(input, options))
+
+          nil
         end
 
         private
