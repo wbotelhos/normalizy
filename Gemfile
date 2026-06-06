@@ -4,10 +4,18 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'codecov'
-gem 'debug'
-gem 'rspec-rails'
-gem 'rubocop-performance'
-gem 'rubocop-rails'
-gem 'rubocop-rspec'
-gem 'sqlite3'
+group :development do
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+end
+
+group :development, :test do
+  gem 'debug'
+  gem 'sqlite3'
+end
+
+group :test do
+  gem 'codecov'
+  gem 'rspec-rails'
+end
