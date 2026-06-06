@@ -1,10 +1,10 @@
 # Normalizy
 
-[![CI](https://github.com/wbotelhos/normalizy/workflows/CI/badge.svg)](https://github.com/wbotelhos/normalizy/actions)
+[![Tests](https://github.com/wbotelhos/normalizy/workflows/Tests/badge.svg)](https://github.com/wbotelhos/normalizy/actions/workflows/tests.yml)
 [![Gem Version](https://badge.fury.io/rb/normalizy.svg)](https://badge.fury.io/rb/normalizy)
-[![Maintainability](https://api.codeclimate.com/v1/badges/3896d0a11bee012c818c/maintainability)](https://codeclimate.com/github/wbotelhos/normalizy/maintainability)
-[![codecov](https://codecov.io/gh/wbotelhos/normalizy/branch/master/graph/badge.svg?token=0XTRFDFHDq)](https://codecov.io/gh/wbotelhos/normalizy)
-[![Sponsor](https://img.shields.io/badge/sponsor-%3C3-green)](https://www.patreon.com/wbotelhos)
+[![Maintainability](https://qlty.sh/gh/wbotelhos/projects/normalizy/maintainability.svg)](https://qlty.sh/gh/wbotelhos/projects/normalizy)
+[![Coverage](https://codecov.io/gh/wbotelhos/normalizy/branch/master/graph/badge.svg?token=0XTRFDFHDq)](https://codecov.io/gh/wbotelhos/normalizy)
+[![Sponsor](https://img.shields.io/badge/sponsor-%3C3-green)](https://github.com/sponsors/wbotelhos)
 
 Attribute normalizer for Rails.
 
