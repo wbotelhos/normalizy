@@ -12,7 +12,7 @@ module Normalizy
           right: '\s*\z',
         }[options[:side] || :both]
 
-        input.gsub Regexp.new(/#{regex}/), ''
+        input.gsub(/#{regex}/, '')
       end
     end
   end
